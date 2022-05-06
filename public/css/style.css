@@ -1,0 +1,27 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+/* BOUTONS DE CONNEXION DEBUT */
+
+#connexion_btn_zone{
+    margin-top: 10px;
+}
+.register_button{
+    position: absolute;
+    right: 115px;
+}
+.logout_login_buttons{
+    position: absolute;
+    right: 15px;
+}
+
+/* BOUTONS DE CONNEXION FIN */
