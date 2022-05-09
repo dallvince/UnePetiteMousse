@@ -3,10 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Products;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\filters\ProductsFilters;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Products>
@@ -82,4 +83,97 @@ class ProductsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findFilters(ProductsFilters $filter)
+    {
+        $query =  $this->createQueryBuilder("p");
+
+        if($filter->search)
+        {
+            $query = $query
+            ->andWhere('p.name LIKE :search')
+            ->orWhere('p.description LIKE :search')
+            ->setParameter("search", "%$filter->search%")
+            ;
+        }
+
+        if($filter->minPrice)
+        {
+            $query = $query
+            ->andwhere('p.price >= :min')
+            ->setParameter("min", $filter->minPrice)
+            ;
+        }
+
+        if($filter->maxPrice)
+        {
+            $query = $query
+            ->andwhere('p.price >= :max')
+            ->setParameter("max", $filter->maxPrice)
+            ;
+        }
+
+        if($filter->style)
+        {
+            $query = $query
+            ->andWhere('style.id IN (:style)')
+            ->setParameter("style", $filter->style)
+            ;
+        }
+
+        if($filter->country)
+        {
+            $query = $query
+            ->andWhere('country.id IN (:country)')
+            ->setParameter("country", $filter->country)
+            ;
+        }
+
+        if($filter->brewry)
+        {
+            $query = $query
+            ->andWhere('brewry.id IN (:brewry)')
+            ->setParameter("brewry", $filter->brewry)
+            ;
+        }
+
+        if($filter->order)
+        {
+            switch($filter->order)
+            {
+                case 1:
+                    $query = $query
+                    ->orderBy("p.price", "ASC")
+                    ;
+                    break;
+
+                    case 2:
+                        $query = $query
+                        ->orderBy("p.price", "DESC")
+                        ;
+                        break;
+                    
+                    case 3:
+                        $query = $query
+                        ->orderBy("p.createdAt", "DESC")
+                        ;
+                        break;
+
+                    case 4:
+                        $query = $query
+                        ->orderBy("p.name", "ASC")
+                        ;
+                        break;
+
+                    case 5:
+                        $query = $query
+                        ->orderBy("p.name", "DESC")
+                        ;
+                        break;
+                }
+        }
+
+        return $query->getQuery()->getResult();
+
+    }
 }
