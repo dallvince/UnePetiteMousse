@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Brewries index{% endblock %}
+
+{% block body %}
+
+<div class="col-md-10 mx-auto">
+    <h1>Brewries index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Voir</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for brewry in brewries %}
+            <tr class="align-middle text-center">
+                <td>{{ brewry.id }}</td>
+                <td>{{ brewry.name }}</td>
+
+                <td>
+                    {% if brewry.description %}
+                        {% if brewry.description|length > 50 %}
+                            {{ brewry.description|slice(0, 150) }}...
+                        {% else %}
+                            {{ brewry.description }}
+                        {% endif %}
+                    {% else %}
+                        <span class="fst-italic">Description non renseignée</span>
+                    {% endif %}
+                </td>
+                
+                <td>
+                    <a href="{{ path('app_admin_brewries_show', {'id': brewry.id}) }}"><i class="fa-solid fa-eye text-info"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_brewries_edit', {'id': brewry.id}) }}"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_brewries_delete', {'id': brewry.id}) }}"><i class="fa-solid fa-trash text-danger"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune brasserie enregistrée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_brewries_new') }}">Create new</a>
+</div>
+{% endblock %}

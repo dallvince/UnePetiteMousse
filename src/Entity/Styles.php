@@ -6,6 +6,7 @@ use App\Repository\StylesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StylesRepository::class)
@@ -25,7 +26,8 @@ class Styles
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Merci de renseigner le Style de bière")
      */
     private $description;
 

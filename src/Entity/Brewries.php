@@ -6,6 +6,7 @@ use App\Repository\BrewriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BrewriesRepository::class)
@@ -21,6 +22,7 @@ class Brewries
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez saisir le nom de la Brasserie")
      */
     private $name;
 
@@ -36,6 +38,7 @@ class Brewries
 
     /**
      * @ORM\ManyToOne(targetEntity=Countries::class, inversedBy="brewries")
+     * 
      */
     private $countries;
 

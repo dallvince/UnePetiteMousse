@@ -25,3 +25,20 @@
 }
 
 /* BOUTONS DE CONNEXION FIN */
+
+/* NAVBAR */
+
+.navbar{
+    height: 10vh;
+    background-color: #FED925;
+}
+
+/* Background */
+
+.bck{
+    background-image: url("../img/bck1.jpg");
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    margin-top: -18px;
+}
