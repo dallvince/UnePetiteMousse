@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Brewries{% endblock %}
+
+{% block body %}
+    <h1>Edit Brewries</h1>
+
+    {{ include('admin_brewries/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_brewries_index') }}">back to list</a>
+
+    {{ include('admin_brewries/_delete_form.html.twig') }}
+{% endblock %}
