@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des Bières | {{ parent()}} {% endblock %}
+
+{% block h1 %}Administration des Bières{% endblock %}
+
+
+
+{% block body %}
+
+
+{% for notification in app.flashes('success') %}
+
+<div class="col-md-6 mx-auto alert alert-success text-center">
+{{ notification }}
+</div>
+
+{% endfor %}
+
+<div class="d-flex table-responsive">
+    <table class="table table-striped table-hover text-center mt-3 mx-5 m-auto">
+        <thead class="bg-dark text-white">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>ABV</th>
+                <th>EBC</th>
+                <th>Sans Gluten</th>
+                <th>Bio</th>
+                <th>Date de Création</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.nom|upper }}</td>
+                <td>{{ product.prix }}</td>
+                <td>{% if produit.description|length > 25 %}
+                    {{ product.description|slice(0,25) }}...
+                {% else %}
+                    {{ product.description }}
+                {% endif %}   
+             </td>
+                <td>{{ product.abv }}</td>
+                <td>{{ product.ebc }}</td>
+                <td>{{ product.glutenfree }}</td>
+                <td>{{ product.organic }}</td>
+                <td>{{ product.createdAt ? product.createdAt|date("F d Y 🕐 h:i") }}</td>
+                <td>{{ product.image }}</td>
+                <td>
+                    <a href="{{ path('app_admin_products_edit', {'id': product.id}) }}"><i class="edit-icon" data-feather="edit" title="modifier"></i></a>
+                    <a onclick="return confirm('Souhaitez vous vraiment supprimer ce produit ?')" href="{{ path('app_admin_products_delete', {'id': product.id}) }}"><i class="delete-icon" data-feather="trash" title="supprimer"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">Aucune Bière n'a été trouvée 😔</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a class="btn btn-success mt-3 ms-5" href="{{ path('app_admin_products_new') }}">Ajouter une Bière</a>
+{% endblock %}
