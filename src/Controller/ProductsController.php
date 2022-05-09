@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Form\FiltersType;
+use App\filters\ProductsFilters;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +28,7 @@ class ProductsController extends AbstractController
     /**
      * @Route("/catalogue", name="catalogue")
      */
-    public function catalogue(ProductsRepository $repoProduit, Request $request) : Response
+    public function catalogue(ProductsRepository $repoProduct, Request $request) : Response
     {
         $filter = new ProductsFilters;
         $form = $this->createForm(FiltersType::class, $filter);
@@ -34,11 +36,11 @@ class ProductsController extends AbstractController
 
         $form->handleRequest($request);
 
-        $produits = $repoProduit->findFiltre($filter);
+        $products = $repoProduct->findAll();
 
 
         return $this->render("products/catalogue.html.twig", [
-            "produits" => $produits,
+            "products" => $products,
             "formFilter" => $form->createView()
         ]);
     }
