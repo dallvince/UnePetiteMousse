@@ -23,7 +23,12 @@ class RegistrationFormType extends AbstractType
 
             ->add('pseudo', TextType::class, [
                 "required" => false,
-            ->add('email', EmailType::class , [])
+                ])
+
+            ->add('email', EmailType::class , [
+                
+            ])
+
             ->add('password', RepeatedType::class, [
                 "type" => PasswordType::class, 
                 'invalid_message' => 'Les deux mots de passe doivent être identique.',
