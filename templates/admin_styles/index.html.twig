@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Styles index{% endblock %}
+
+{% block body %}
+<div class="col-md-10 mx-auto">
+    <h1>Styles index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Picture</th>
+                <th>Voir</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for style in styles %}
+            <tr class="align-middle text-center">
+                <td>{{ style.id }}</td>
+                <td>{{ style.name }}</td>
+                <td>
+                {% if style.description %}
+                        {% if style.description|length > 50 %}
+                            {{ style.description|slice(0, 150) }}...
+                        {% else %}
+                            {{ style.description }}
+                        {% endif %}
+                    {% else %}
+                        <span class="fst-italic">Description non renseignée</span>
+                    {% endif %}
+                </td>
+                <td>{{ style.picture }}</td>
+                <td>
+                    <a href="{{ path('app_admin_styles_show', {'id': style.id}) }}"><i class="fa-solid fa-eye text-info"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_styles_edit', {'id': style.id}) }}"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_styles_edit', {'id': style.id}) }}"><i class="fa-solid fa-trash text-danger"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun style n'a encore été ajouté</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('app_admin_styles_new') }}">Ajouter un style</a>
+</div>
+{% endblock %}
