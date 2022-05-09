@@ -6,6 +6,12 @@
 parameters:
     imageUpload: '%kernel.project_dir%/public/img/upload'
 
+doctrine:
+     orm:
+         dql:
+             numeric_functions:
+                 rand: DoctrineExtensions\Query\Mysql\Rand
+
 services:
     # default configuration for services in *this* file
     _defaults:

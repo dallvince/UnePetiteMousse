@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Mousses | {{ parent() }} {% endblock %}
+
+{% block h1 %}Nos Mousses{% endblock %}
+
+{% block body %}
+
+ <div class="row justify-content-center"> 
+        {% for product in products %} 
+        <div class="col-md-3 m-4 p-4">
+    <p class="product_category">Produit</p> 
+    <a href="#">{{ product.name|capitalize }}</a>
+           
+            
+        </div>
+        {% else %}
+            <h4 class="text-center">Il n'y a plus de bières disponibles 😔</h4>
+        {% endfor %}
+        
+     </div>
+
+{% endblock %}
