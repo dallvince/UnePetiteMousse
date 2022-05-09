@@ -30,22 +30,27 @@
       </form> #}
     </div>
   </div>
+
+  <div id="connexion_btn_zone mb-5">
+    {% if not app.user  %}
+      <div class="nav-item register_button">
+        <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
+      </div>
+      {% endif %}
+      {% if not app.user  %}
+      <div class="logout_login_buttons">
+        <a class="btn btn-success text-light" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
+      </div>
+      {% endif %}
+      {% if app.user  %}
+      <div class="logout_login_buttons">
+        <a class="btn btn-danger text-light" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
+      </div>
+      {% endif %}
+  </div>
+
 </nav>
 
-<div id="connexion_btn_zone">
-   {% if not app.user  %}
-    <div class="nav-item register_button">
-      <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
-    </div>
-    {% endif %}
-    {% if not app.user  %}
-    <div class="logout_login_buttons">
-      <a class="btn btn-success text-light" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
-    </div>
-    {% endif %}
-    {% if app.user  %}
-    <div class="logout_login_buttons">
-      <a class="btn btn-danger text-light" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
-    </div>
-    {% endif %}
-</div>
+  {# <div class="bulles">
+    <img src="./public/img/bck1.jpg" alt="">
+  </div> #}
