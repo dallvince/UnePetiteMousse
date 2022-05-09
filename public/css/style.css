@@ -29,8 +29,25 @@
 /* NAVBAR */
 
 .navbar{
-    height: 10vh;
-    background-color: #FED925;
+    height: 7vh;
+     
+   /* background-image: url("https://images.radio.com/aiu-media/gettyimages-1064539354-1-34236ad9-c72f-483e-afe8-0156ea824022.jpg");
+    background-position: 50% 19%; */
+    background-size: cover;
+}
+
+.nav_container{
+    background-color: #fcd80e;
+}
+
+.bg-navbar{
+    
+    height: 5vh;
+    background-image: url("https://images.radio.com/aiu-media/gettyimages-1064539354-1-34236ad9-c72f-483e-afe8-0156ea824022.jpg");
+    background-position: 50% 19%;
+    background-size: cover;
+    opacity: 0.6 ;
+
 }
 
 /* Background */
