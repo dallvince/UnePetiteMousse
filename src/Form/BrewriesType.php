@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class BrewriesType extends AbstractType
 {
@@ -22,7 +23,8 @@ class BrewriesType extends AbstractType
                 {
                     return $countries->getFlag() . " " . $countries->getName();
                 },
-                "required" => false
+                "required" => false,
+                "placeholder" => "Choisissez un pays"
             ])
         ;
     }

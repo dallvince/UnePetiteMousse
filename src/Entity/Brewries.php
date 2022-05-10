@@ -38,7 +38,7 @@ class Brewries
 
     /**
      * @ORM\ManyToOne(targetEntity=Countries::class, inversedBy="brewries")
-     * 
+     * @Assert\NotBlank(message="Veuillez choisir un pays")
      */
     private $countries;
 
@@ -111,7 +111,7 @@ class Brewries
         return $this->countries;
     }
 
-    public function setCountries(?Countries $countries): self
+    public function setCountries(Countries $countries): self
     {
         $this->countries = $countries;
 
