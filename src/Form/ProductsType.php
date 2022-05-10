@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Brewries;
 use App\Entity\Products;
+use App\Entity\Styles;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -58,8 +60,18 @@ class ProductsType extends AbstractType
                 "required" => false
             ])
 
-            ->add('styles')
-            ->add('brewries')
+            ->add('styles', EntityType::class, [  // Cet élément du formulaire va être en relation avec :
+                "class" => Styles::class,          //  La class Categorie
+                "choice_label" => "nom",               // On lui dit d'afficher le nom de la catégorie
+                "placeholder" => "Choisir un style",
+                "required" => false
+            ])
+            ->add('brewries', EntityType::class, [  // Cet élément du formulaire va être en relation avec :
+                "class" => Brewries::class,          //  La class Categorie
+                "choice_label" => "nom",               // On lui dit d'afficher le nom de la catégorie
+                "placeholder" => "Choisir une Brasserie",
+                "required" => false
+            ])
 
             ->add('glutenfree', ChoiceType::class, [
                 "label" => "Sans Gluten",
