@@ -2,12 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Brewries;
-use App\Entity\Products;
 use App\Entity\Styles;
+use App\Entity\Brewries;
+use App\Entity\Countries;
+use App\Entity\Products;
+use App\Repository\StylesRepository;
+use App\Repository\BrewriesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -60,34 +64,48 @@ class ProductsType extends AbstractType
                 "required" => false
             ])
 
-            ->add('styles', EntityType::class, [  // Cet élément du formulaire va être en relation avec :
-                "class" => Styles::class,          //  La class Categorie
-                "choice_label" => "nom",               // On lui dit d'afficher le nom de la catégorie
+            ->add('styles', EntityType::class, [
+                "class" => Styles::class,
+                "choice_label" => "name",
                 "placeholder" => "Choisir un style",
-                "required" => false
+                'query_builder' => function (StylesRepository $sr) {
+                    return $sr->createQueryBuilder('p')
+                    ->orderBy('p.name', 'ASC');
+                } 
             ])
-            ->add('brewries', EntityType::class, [  // Cet élément du formulaire va être en relation avec :
-                "class" => Brewries::class,          //  La class Categorie
-                "choice_label" => "nom",               // On lui dit d'afficher le nom de la catégorie
+            ->add('brewries', EntityType::class, [
+                "class" => Brewries::class,
+                "choice_label" => "name",
                 "placeholder" => "Choisir une Brasserie",
+                'query_builder' => function (BrewriesRepository $br) {
+                    return $br->createQueryBuilder('p')
+                    ->orderBy('p.name', 'ASC'); 
+                }
+            ])
+            ->add('countries', EntityType::class, [
+                "class" => Countries::class,
+                "mapped" => false,
+                "choice_label" => function ($countries) 
+                {
+                    return $countries->getFlag() . " " . $countries->getName();
+                },
                 "required" => false
             ])
 
             ->add('glutenfree', ChoiceType::class, [
                 "label" => "Sans Gluten",
                 'choices'  => [
-                    'Oui' => true,
-                    'Non' => false
+                    'Oui' => 'oui',
+                    'Non' => 'non'
                 ]
             ])
             ->add('organic', ChoiceType::class, [
                 "label" => "Bio",
                 'choices'  => [
-                    'Oui' => true,
-                    'Non' => false
+                    'Oui' => 'oui',
+                    'Non' => 'non'
                 ]
             ])
-
             ->add('price', MoneyType::class, [
                 "label" => "Prix",
                 "required" => false,

@@ -107,6 +107,7 @@
 
 
 
+
 /*  CATALOGUE - DEBUT  */
 
 .form-filters label{
@@ -115,4 +116,8 @@
 .form-filters{
     height: max-content;
 }
+.img150{
+    height: 150px;
+}
 /*  CATALOGUE - FIN */
+
