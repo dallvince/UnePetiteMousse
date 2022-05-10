@@ -19,20 +19,31 @@ class FiltersType extends AbstractType
     {
         $builder
             ->add('search', TextType::class, [
+                "attr" => [
+                    "placeholder" => "Mots-clés"
+                    ],
                 "required" => false
             ])
             ->add('minPrice', TextType::class, [
+                "attr" => [
+                    "placeholder" => "Prix Minimum"
+                    ],
                 "required" => false
             ])
             ->add('maxPrice', TextType::class, [
+                "attr" => [
+                "placeholder" => "Prix Maximum"
+                ],
                 "required" => false
             ])
             ->add('style', EntityType::class, [
+                "placeholder" => "Filtrer par Styles",
                 "class" => Styles::class,
                 "choice_label" => "name",
                 "required" => false
             ])
             ->add('country', EntityType::class, [
+                "placeholder" => "Filtrer par Pays",
                 "class" => Countries::class,
                 "choice_label" => "name",
                 "required" => false,
@@ -40,17 +51,19 @@ class FiltersType extends AbstractType
             ])
             ->add('brewry', EntityType::class, [
                 "class" => Brewries::class,
+                "placeholder" => "Trier par Brasserie",
                 "choice_label" => "name",
                 "required" => false,
             ])
             ->add('order', ChoiceType::class, [
                 "required" => false,
+                "placeholder" => "Filtrer par :",
                 "choices" => [
-                    "Prix : Croissant" => 1,
-                    "Prix : Décroissant" => 2,
+                    "Prix croissant" => 1,
+                    "Prix décroissant" => 2,
                     "Les plus récents" => 3,
-                    "Nom : Croissant" => 4,
-                    "Nom : Décroissant" => 5
+                    "Nom croissant" => 4,
+                    "Nom décroissant" => 5
                 ]
             ])
         ;

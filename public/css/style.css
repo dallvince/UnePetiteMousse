@@ -5,10 +5,14 @@
 }
 
 
+/* LOGIN & REGISTER FORMS         DEBUT  */
 
+.form-check{
+    margin: auto;
+    width: 150px;
+}
 
-
-
+/* LOGIN & REGISTER FORMS         FIN  */
 
 /* BOUTONS DE CONNEXION DEBUT */
 
@@ -26,35 +30,70 @@
 
 /* BOUTONS DE CONNEXION FIN */
 
+
+
+/*  PAGE DE BASE  -  DEBUT  */
+
+.title-page{
+    padding-top: 10px;
+}
+
+/*  PAGE DE BASE  - FIN */
+
 /* NAVBAR */
 
+
+
+#logo{
+    width: 260px;
+    transition: 0.5s;
+    margin-bottom: 15px;
+    margin-right: 20px;
+}
 .navbar{
-    height: 7vh;
-     
-   /* background-image: url("https://images.radio.com/aiu-media/gettyimages-1064539354-1-34236ad9-c72f-483e-afe8-0156ea824022.jpg");
-    background-position: 50% 19%; */
+    display: flex;
+    align-items: center;
+    height: 10vh;
     background-size: cover;
+}
+
+.navbar{
+    font-weight: 600;
+    font-size: larger;
 }
 
 .nav_container{
     background-color: #fcd80e;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.administration_nav{
+    position: absolute;
+    right: 12%;
+}
+.nav-cart-logo{
+    position: absolute;
+    width: 30px;
+    opacity: 0.8;
+    right: 3%;
+    transition: 0.2s;
+}
+.nav-cart-logo:hover{
+    opacity: 1;
 }
 
 .bg-navbar{
-    
     height: 5vh;
-    background-image: url("https://images.radio.com/aiu-media/gettyimages-1064539354-1-34236ad9-c72f-483e-afe8-0156ea824022.jpg");
-    background-position: 50% 19%;
-    background-size: cover;
-    opacity: 0.6 ;
-
+    background-color: #fcd80e;
+    background-image: url("../img/Beer-bubbles.gif");
+    background-position: 100% 25%;
+    opacity: 1;
+    transition: 0.5s ease-in-out;
+    -webkit-mask:linear-gradient(#000, #0000);
+          mask:linear-gradient(#000, #0000);
 }
 
-/* .bulles{
-    border: 2px solid red;
-    height: 100px;
-    width: 100px;
-} */
+
 
 /* Background */
 
@@ -66,7 +105,19 @@
     margin-top: -18px;
 }
 
-/* CATALOGUE */
+
+
+
+/*  CATALOGUE - DEBUT  */
+
+.form-filters label{
+    display: none;
+}
+.form-filters{
+    height: max-content;
+}
 .img150{
     height: 150px;
 }
+/*  CATALOGUE - FIN */
+
