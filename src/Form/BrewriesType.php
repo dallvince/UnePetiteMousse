@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Brewries;
+use App\Entity\Countries;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class BrewriesType extends AbstractType
 {
@@ -14,7 +17,11 @@ class BrewriesType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('countries')
+            ->add('countries', EntityType::class, [
+                "class" => Countries::class,
+                "placeholder" => "Choisissez un pays",
+                "required" => false,
+            ])
         ;
     }
 
