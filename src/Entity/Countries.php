@@ -34,6 +34,11 @@ class Countries
      */
     private $brewries;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $iso;
+
     public function __construct()
     {
         $this->brewries = new ArrayCollection();
@@ -102,4 +107,16 @@ class Countries
     // {
     //     return $this->name;
     // }
+
+    public function getIso(): ?string
+    {
+        return $this->iso;
+    }
+
+    public function setIso(string $iso): self
+    {
+        $this->iso = $iso;
+
+        return $this;
+    }
 }
