@@ -9,9 +9,10 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="align-middle text-center">
                 <th>Id</th>
-                <th>Name</th>
+                <th>Pays</th>
+                <th>Brasserie</th>
                 <th>Description</th>
                 <th>Voir</th>
                 <th>Modifier</th>
@@ -22,6 +23,7 @@
         {% for brewry in brewries %}
             <tr class="align-middle text-center">
                 <td>{{ brewry.id }}</td>
+                <td>{{ brewry.countries}}</td>
                 <td>{{ brewry.name }}</td>
 
                 <td>

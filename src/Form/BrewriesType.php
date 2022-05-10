@@ -19,8 +19,12 @@ class BrewriesType extends AbstractType
             ->add('description')
             ->add('countries', EntityType::class, [
                 "class" => Countries::class,
-                "placeholder" => "Choisissez un pays",
+                "choice_label" => function ($countries) 
+                {
+                    return $countries->getFlag() . " " . $countries->getName();
+                },
                 "required" => false,
+                "placeholder" => "Choisissez un pays"
             ])
         ;
     }

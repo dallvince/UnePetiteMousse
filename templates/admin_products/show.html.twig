@@ -25,6 +25,11 @@
             </tr>
             <tr>
                 <th>Picture</th>
+                {% if product.picture %}
+                    <img src="{{asset('img/upload/' ~ product.picture)}}" alt="">
+                {% else %}
+                    <p>Aucune image disponible pour le moment</p>
+                {% endif %}
                 <td>{{ product.picture }}</td>
             </tr>
             <tr>

@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\CountriesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CountriesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CountriesRepository::class)
@@ -73,6 +73,18 @@ class Countries
         return $this;
     }
 
+    public function getIso(): ?string
+    {
+        return $this->iso;
+    }
+
+    public function setIso(string $iso): self
+    {
+        $this->iso = $iso;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Brewries>
      */
@@ -103,20 +115,10 @@ class Countries
         return $this;
     }
 
-    // public function __toString()
-    // {
-    //     return $this->name;
-    // }
-
-    public function getIso(): ?string
+    public function __toString()
     {
-        return $this->iso;
-    }
+        return $this->name;
 
-    public function setIso(string $iso): self
-    {
-        $this->iso = $iso;
 
-        return $this;
     }
 }
