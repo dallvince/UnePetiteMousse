@@ -5,9 +5,18 @@
 {% block body %}
     <h1>Edit Brewries</h1>
 
-    {{ include('admin_brewries/_form.html.twig', {'button_label': 'Update'}) }}
+    <a class="btn btn-secondary ms-3" href="{{ path('app_admin_products_index') }}">Retour</a>
 
-    <a href="{{ path('app_admin_brewries_index') }}">back to list</a>
+    <div class="col-md-10 mx-auto">
+        {{ form_start(form)}}
+            {{ form_row(form.name)}}
+            {{ form_row(form.description)}}
+            {{ form_row(form.countries)}}
 
-    {{ include('admin_brewries/_delete_form.html.twig') }}
+            <div class="d-flex justify-content-center">
+                <input type="submit" value="Modifier" class="btn btn-warning col-md-2 mt-3">
+            </div>
+        {{ form_end(form)}}
+
+
 {% endblock %}

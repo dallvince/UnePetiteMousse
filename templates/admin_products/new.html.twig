@@ -6,16 +6,17 @@
 
 {% block body %}
 
-   <a class="btn btn-secondary ms-3" href="{{ path('app_admin_products_index') }}">Retour</a>
+    <a class="btn btn-secondary ms-3" href="{{ path('app_admin_products_index') }}">Retour</a>
 
-   <div class="col-md-8 m-auto">
-     {{ form_start(formProduct)}}
+    <div class="col-md-8 m-auto">
+    {{ form_start(formProduct)}}
         {{ form_row(formProduct.name)}}
         {{ form_row(formProduct.description)}}
         {{ form_row(formProduct.abv)}}
         {{ form_row(formProduct.ebc)}}
         {{ form_row(formProduct.styles)}}
         {{ form_row(formProduct.brewries)}}
+        {{ form_row(formProduct.countries)}}
         {{ form_row(formProduct.glutenfree)}}
         {{ form_row(formProduct.organic)}}
         {{ form_row(formProduct.price)}}
@@ -28,12 +29,11 @@
         <div id="zone" class="d-flex mt-2 m-auto image_preview  text-center justify-content-center col-md-2 img-thumbnail">
             {% if product.picture %}
                 <img class="img-fluid img-thumbnail" src="{{ asset('img/upload/' ~ product.picture)}}" alt="">
-                <td><a href="{{ path("suppression_image", {'id': product.id} ) }}"><i class="delete-icon" data-feather="trash" title="supprimer"></i></a></td>
+                <td><a href="{{ path("picture_delete", {'id': product.id} ) }}"><i class="delete-icon" data-feather="trash" title="supprimer"></i></a></td>
             {% endif %}
         </div>
 
-       
-        {{ form_end(formProduct)}}
+    {{ form_end(formProduct)}}
     </div>
 
 {% endblock %}

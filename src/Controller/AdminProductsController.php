@@ -96,16 +96,13 @@ class AdminProductsController extends AbstractController
 
 
             if($pictureFile){
-              
+
                 $PictureName = date('YmdHis') . "-" . uniqid() . "." . $pictureFile->getClientOriginalExtension();
                 $pictureFile->move($this->getParameter('pictureUpload'),  $PictureName);
 
-
-
                 if($product->getPicture()){ 
-                    unlink($this->getParameter('imageUpload') . "/" . $product->getPicture());
+                    unlink($this->getParameter('pictureUpload') . "/" . $product->getPicture());
                     
-  
                 }  
                 
                 
@@ -120,10 +117,9 @@ class AdminProductsController extends AbstractController
             return $this->redirectToRoute('app_admin_products_index', [], Response::HTTP_SEE_OTHER);
         }
 
-
         return $this->renderForm('admin_products/edit.html.twig', [
             'product' => $product,
-            'form' => $form,
+            'formProduct' => $form,
         ]);
     }
 
@@ -138,5 +134,26 @@ class AdminProductsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_products_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/admin/product/picture/delete", name="picture_delete", methods={"POST"})
+     */
+    public function pictureDelete(Products $products, EntityManagerInterface $manager) : Response
+    {
+        if($products->getPicture())
+        {
+            unlink($this->getParameter('pictureUpload') . "/" . $products->getPicture());
+            $products->setPicture(NULL);
+
+            $manager->persist($products);
+            $manager->flush();
+
+            $this->addFlash("success", "L'image du produit" . "'" . $products->getName() . "'" . "à bien été supprimée");
+            return $this->redirectToRoute('app_admin_products_edit', ["id" => $products->getId()]);
+        } else {
+            $this->addFlash("error", "Ce produit n'a pas d'image");
+            return $this->redirectToRoute('app_admin_products_show');
+        }
     }
 }

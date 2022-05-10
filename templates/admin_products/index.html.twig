@@ -32,30 +32,37 @@
                 <th>Bio</th>
                 <th>Date de Création</th>
                 <th>Image</th>
-                <th>Actions</th>
+                <th>Voir</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
         {% for product in products %}
             <tr>
                 <td>{{ product.id }}</td>
-                <td>{{ product.nom|upper }}</td>
-                <td>{{ product.prix }}</td>
-                <td>{% if produit.description|length > 25 %}
+                <td>{{ product.name|upper }}</td>
+                <td>{{ product.price }}</td>
+                <td>{% if product.description|length > 25 %}
                     {{ product.description|slice(0,25) }}...
                 {% else %}
                     {{ product.description }}
                 {% endif %}   
-             </td>
+                </td>
                 <td>{{ product.abv }}</td>
                 <td>{{ product.ebc }}</td>
                 <td>{{ product.glutenfree }}</td>
                 <td>{{ product.organic }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date("F d Y 🕐 h:i") }}</td>
-                <td>{{ product.image }}</td>
+                <td>{{ product.picture }}</td>
                 <td>
-                    <a href="{{ path('app_admin_products_edit', {'id': product.id}) }}"><i class="edit-icon" data-feather="edit" title="modifier"></i></a>
-                    <a onclick="return confirm('Souhaitez vous vraiment supprimer ce produit ?')" href="{{ path('app_admin_products_delete', {'id': product.id}) }}"><i class="delete-icon" data-feather="trash" title="supprimer"></i></a>
+                    <a href="{{ path('app_admin_products_show', {'id': product.id}) }}"><i class="fa-solid fa-eye text-info"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_products_edit', {'id': product.id}) }}"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_products_delete', {'id': product.id}) }}" onclick="return confirm('Souhaitez vous vraiment supprimer ce produit ?')"><i class="fa-solid fa-trash text-danger"></i></a>
                 </td>
             </tr>
         {% else %}
