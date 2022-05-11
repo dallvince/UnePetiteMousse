@@ -51,7 +51,7 @@ class AdminProductsController extends AbstractController
                 $pictureName = date('YmdHis') . "-" . uniqid() . "." . $pictureFile->getClientOriginalExtension();
                 
                 $pictureFile->move($this->getParameter('pictureUpload'),  $pictureName);
- 
+
                 $product->setPicture($pictureName);
             }
 
