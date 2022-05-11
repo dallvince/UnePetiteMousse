@@ -6,20 +6,30 @@
 
 {% block body %}
 
-
-   
-    <div class="row justify-content-center"> 
-        {% for product in RandomProducts %} 
-        <div class="col-md-3 m-4 p-4">
-    <p class="product_category">Produit</p> 
-    <a href="#">{{ product.name|capitalize }}</a>
-           
-            
+        <div id="carouselExampleIndicators" class="carousel carousel-container align-items-center slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+        <div class="carousel-inner card-container ">
+            {% for k, product in RandomProducts %} 
+            <div class="carousel-item {% if k == 0 %} active {% endif %}">
+                    <a href="#"><img class="d-block m-auto image-card" src="{{ asset('img/upload/' ~ product.picture ) }}" alt="Image de Bière"></a> 
+                    <a class="product-name-link" href="#"><p class="product-name">{{ product.name|capitalize }}</p></a>
+            </div>
+            {% endfor %}
         </div>
-        {% else %}
-            <h4 class="text-center">Il n'y a plus de bières disponibles 😔</h4>
-        {% endfor %}
-        
-     </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+        </div>
 
 {% endblock %}

@@ -4,7 +4,6 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-light p-3">
     <div class="container-fluid">
-
       <a class="navbar-brand fw-bold fs-2" href="{{ path('app_home')}}"><img id='logo' src="{{ asset("/img/nav/Logo.png")}}" alt="Logo et Accueil"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,13 +11,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-
-            <a class="nav-link active" aria-current="page" href="{{path('catalogue')}}">Nos Mousses</a>
+            <a class="nav-link active" aria-current="page" href="{{path('catalogue')}}"><p class="nos-mousses">Nos Mousses</p></a>
           </li>
 
           {% if app.user %}
             {% if is_granted("ROLE_ADMIN") %}
-              <li class="nav-item dropdown">
+            <div class="administration_nav">
+              <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle text-danger" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% if is_granted('ROLE_ADMIN') %}
                   Tableau de Bord
@@ -32,6 +31,7 @@
                   <li><a class="dropdown-item" href="{{ path('app_admin_brewries_index') }}">Gestion des Brasseries</a></li>
                 </ul>
               </li>
+              </div>
             {% endif %}
           {% endif %}
           <li>
@@ -42,7 +42,8 @@
     </div>
   </nav>
 </div>
-{# ZONE DE CONNEXION #}
+
+  {# ZONE DE CONNEXION #}
   <div id="connexion_btn_zone">
     {% if not app.user  %}
       <div class="nav-item register_button">
@@ -62,7 +63,3 @@
   </div>
 
 </nav>
-
-  {# <div class="bulles">
-    <img src="./public/img/bck1.jpg" alt="">
-  </div> #}

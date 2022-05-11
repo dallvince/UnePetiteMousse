@@ -40,20 +40,20 @@
 
 /*  PAGE DE BASE  - FIN */
 
-/* NAVBAR */
 
 
+/* NAVBAR  -  DEBUT  */
 
 #logo{
     width: 260px;
     transition: 0.5s;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     margin-right: 20px;
 }
 .navbar{
     display: flex;
     align-items: center;
-    height: 10vh;
+    height: 80px;
     background-size: cover;
 }
 
@@ -64,12 +64,22 @@
 
 .nav_container{
     background-color: #fcd80e;
+    background-image: linear-gradient(to top, #ffbc00, #ffca00, #ffd800, #ffe600, #fff400);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.nav-item{
+    opacity: 0.9;
+    transition: 0.2s;
+}
+.nav-item:hover{
+    opacity: 1;
+}
+
+
 .administration_nav{
     position: absolute;
-    right: 12%;
+    right: 8%;
 }
 .nav-cart-logo{
     position: absolute;
@@ -77,13 +87,16 @@
     opacity: 0.8;
     right: 3%;
     transition: 0.2s;
+    filter: invert(20%);
+    transition: 0.2s;
 }
 .nav-cart-logo:hover{
     opacity: 1;
+    filter: invert(0%);
 }
 
 .bg-navbar{
-    height: 5vh;
+    height: 50px;
     background-color: #fcd80e;
     background-image: url("../img/Beer-bubbles.gif");
     background-position: 100% 25%;
@@ -93,9 +106,11 @@
     mask:linear-gradient(#000, #0000);
 }
 
+/* NAVBAR  -  FIN  */
 
 
-/* Background */
+
+/* BACKGROUND - DEBUT */
 
 .bck{
     background-image: url("../img/bck1.jpg");
@@ -105,6 +120,67 @@
     margin-top: -18px;
 }
 
+/* BACKGROUND - FIN */
+
+
+
+/*   ACCUEIL - DEBUT  */
+
+.carousel-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 400px;
+    width: 550px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.card-container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    padding: 20px;
+    height: 400px;
+    fill: #000000;
+}
+.carousel-control-next, .carousel-control-prev{
+    background-color: rgba(0, 0, 0, 0.251);
+    transition: 0.2s  ease-in-out;
+}
+.carousel-control-next:hover, .carousel-control-prev:hover{
+    background-color: rgba(0, 0, 0, 0.56);
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon{
+    filter: invert(1);
+    transition: 0.2s;
+}
+.carousel-control-next-icon:hover, .carousel-control-prev-icon:hover{
+    filter:brightness(5);
+}
+.image-card{
+    height: 310px;
+    margin-bottom: 20px;
+}
+.product-name{
+    font-weight: 600;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+.product-name-link{
+    color: #1b0000;
+    
+}
+.product-name-link:link{
+    text-decoration: none;
+}
+
+/*   ACCUEIL - FIN */
 
 
 
@@ -116,8 +192,30 @@
 .form-filters{
     height: max-content;
 }
+.all-catalogue-container{
+    flex-wrap: wrap;
+}
+.product-card-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 300px;
+
+}
+.catalogue-product-title{
+    height: 50px;
+    color: #000;
+    text-align: center;
+}
+.link-deco:link{
+    text-decoration: none;
+}
 .img150{
     height: 150px;
+    margin-bottom: 10px;
+}
+.price{
+    color: #180e00;
 }
 /*  CATALOGUE - FIN */
-
