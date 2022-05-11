@@ -90,7 +90,7 @@
     opacity: 1;
     transition: 0.5s ease-in-out;
     -webkit-mask:linear-gradient(#000, #0000);
-          mask:linear-gradient(#000, #0000);
+    mask:linear-gradient(#000, #0000);
 }
 
 

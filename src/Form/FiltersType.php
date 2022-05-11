@@ -6,6 +6,8 @@ use App\Entity\Styles;
 use App\Entity\Brewries;
 use App\Entity\Countries;
 use App\filters\ProductsFilters;
+use App\Repository\BrewriesRepository;
+use App\Repository\CountriesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,6 +17,29 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class FiltersType extends AbstractType
 {
+    private $brasseries;
+    private $repoBrewries;
+    public function __construct(BrewriesRepository $repo) 
+    {
+        $this->repoBrewries = $repo;
+        $this->brasseries = $repo->findAll();
+    }
+
+    public function pays()
+    {
+        // $brewries = $this->repoBrewries->findAll();
+        $array = [];
+        foreach($this->brasseries as $object)
+        {
+            $array[$object->getCountries()->getName()] = $object->getCountries();
+        }
+        $array = array_unique($array);
+        asort($array);
+        // dd($array);
+        return $array;
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -47,7 +72,14 @@ class FiltersType extends AbstractType
                 "class" => Countries::class,
                 "choice_label" => "name",
                 "required" => false,
-                // "multiple" => true,
+                "choices" => $this->pays()
+                // "query_builder" => function (CountriesRepository $cr)
+                // {
+                //     return $cr->createQueryBuilder('b')
+                //     ->leftJoin('b.countries', 'c')
+                //     ->andWhere()
+                //     ->orderBy('c.name', "ASC");
+                // }
             ])
             ->add('brewry', EntityType::class, [
                 "class" => Brewries::class,
@@ -66,6 +98,10 @@ class FiltersType extends AbstractType
                     "Nom décroissant" => 5
                 ]
             ])
+            // ->add('test', ChoiceType::class, [
+            //     "mapped" => false,
+            //     "choices" => $this->pays() 
+            // ])
         ;
     }
 

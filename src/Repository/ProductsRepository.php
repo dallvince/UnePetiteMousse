@@ -86,7 +86,10 @@ class ProductsRepository extends ServiceEntityRepository
 
     public function findFilters(ProductsFilters $filter)
     {
-        $query =  $this->createQueryBuilder("p");
+        $query =  $this->createQueryBuilder("p")
+        ->leftJoin("p.brewries", "brewry")
+        ->leftJoin("brewry.countries", "countries")
+        ;
 
         if($filter->search)
         {
@@ -124,7 +127,7 @@ class ProductsRepository extends ServiceEntityRepository
         if($filter->country)
         {
             $query = $query
-            ->andWhere('country.id IN (:country)')
+            ->andWhere('countries.id IN (:country)')
             ->setParameter("country", $filter->country)
             ;
         }
@@ -132,7 +135,7 @@ class ProductsRepository extends ServiceEntityRepository
         if($filter->brewry)
         {
             $query = $query
-            ->andWhere('brewry.id IN (:brewry)')
+            ->andWhere('brewries.id IN (:brewry)')
             ->setParameter("brewry", $filter->brewry)
             ;
         }

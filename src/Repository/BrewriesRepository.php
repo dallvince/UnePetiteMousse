@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Brewries;
+use App\filters\ProductsFilters;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
@@ -71,4 +72,16 @@ class BrewriesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function beerEnabled(): array
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin("b.products", "p")
+            ->andWhere('p.products = :val')
+            ->setParameter('val', 1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }
