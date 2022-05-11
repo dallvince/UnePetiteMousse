@@ -63,9 +63,11 @@ class ProductsType extends AbstractType
                 "attr" => ["placeholder" => "Saisir le degré d'amertume"],
                 "required" => false
             ])
+
             ->add('styles', EntityType::class, [
                 "class" => Styles::class,
                 "choice_label" => "name",
+                "placeholder" => "Choisir un style",
                 'query_builder' => function (StylesRepository $sr) {
                     return $sr->createQueryBuilder('p')
                     ->orderBy('p.name', 'ASC');
@@ -74,6 +76,7 @@ class ProductsType extends AbstractType
             ->add('brewries', EntityType::class, [
                 "class" => Brewries::class,
                 "choice_label" => "name",
+                "placeholder" => "Choisir une Brasserie",
                 'query_builder' => function (BrewriesRepository $br) {
                     return $br->createQueryBuilder('p')
                     ->orderBy('p.name', 'ASC'); 

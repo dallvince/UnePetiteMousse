@@ -53,10 +53,15 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                "attr" => [
+                    "class" => "form-check-input m-auto"
+                ],
+                "row_attr" => [
+                    "id" => "check_register"
+                ],
                 'constraints' => [
                     new IsTrue([
-
-                        'message' => 'Vous devez acceptez nos conditions',
+                        'message' => 'Vous devez acceptez nos conditions pour pouvoir vous inscrire.',
                     ]),
                 ],
             ])

@@ -36,7 +36,7 @@ class ProductsController extends AbstractController
 
         $form->handleRequest($request);
 
-        $products = $repoProduct->findAll();
+        $products = $repoProduct->findFilters($filter);
 
 
         return $this->render("products/catalogue.html.twig", [
