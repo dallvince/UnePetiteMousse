@@ -79,6 +79,11 @@ class Products
      */
     private $brewries;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status = 0;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -247,6 +252,18 @@ class Products
     public function setBrewries(?Brewries $brewries): self
     {
         $this->brewries = $brewries;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
