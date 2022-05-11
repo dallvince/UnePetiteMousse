@@ -22,7 +22,6 @@
         <thead class="bg-dark text-white">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Prix</th>
                 <th>Description</th>
@@ -31,7 +30,7 @@
                 <th>Sans Gluten</th>
                 <th>Bio</th>
                 <th>Date de Création</th>
-                <th>Image</th>
+                <th>Actif</th>
                 <th>Voir</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
@@ -40,11 +39,10 @@
         <tbody>
         {% for product in products %}
             <tr>
-                <td>{{ product.id }}</td>
                 <td>{{ product.name|upper }}</td>
                 <td>{{ product.price }}</td>
-                <td>{% if product.description|length > 25 %}
-                    {{ product.description|slice(0,25) }}...
+                <td>{% if product.description|length > 100 %}
+                    {{ product.description|slice(0,100) }}...
                 {% else %}
                     {{ product.description }}
                 {% endif %}   
@@ -54,7 +52,12 @@
                 <td>{{ product.glutenfree }}</td>
                 <td>{{ product.organic }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date("F d Y 🕐 h:i") }}</td>
-                <td>{{ product.picture }}</td>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                    </div>
+                </td>
                 <td>
                     <a href="{{ path('app_admin_products_show', {'id': product.id}) }}"><i class="fa-solid fa-eye text-info"></i></a>
                 </td>
