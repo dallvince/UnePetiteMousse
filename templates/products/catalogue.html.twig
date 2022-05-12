@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent()}} | Catalogue{% endblock %}
 
-{% block h1 %}Catalogue des produits{% endblock %}
+{% block h1 %}Catalogue des Mousses{% endblock %}
 
 {% block body %}
 <div class="row col-11 m-auto">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="text-center">
                     {% if product.picture %}
-                        <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img150">
+                        <a href="{{  path("fiche_produit", {'id': product.id} )  }}"><img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img150"></a>
                     {% else %}
                         <img src="{{ asset('img/beer-default.png')}}" alt="" class="img150">
                     {% endif %}
@@ -53,7 +53,7 @@
                 <a href="{{ path('cart_add', {'id': product.id}) }}"><input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier"></a>
                 <div class=" d-flex card-bottom justify-content-between">
                 <a class="link-deco voir-eye" href="{{  path("fiche_produit", {'id': product.id} )  }}">👁️</a>
-                <p>{{ product.brewries.countries.flag }}</p>
+                <p title="{{ product.brewries.countries.name }}">{{ product.brewries.countries.flag }}</p>
                 </div>
 
             </div>

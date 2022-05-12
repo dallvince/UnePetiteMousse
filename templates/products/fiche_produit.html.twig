@@ -15,9 +15,9 @@
 
     {% endfor %}
 
-    <a class="btn btn-dark mt-3" href="{{ path('catalogue') }}">Catalogue</a>
+    <a class="btn btn-dark mt-3 ms-5" href="{{ path('catalogue') }}">Catalogue</a>
 
-    <div class="shadow col-md-6 mx-auto text-center m-4 p-4">
+    <div class="shadow col-md-8 mx-auto text-center m-4 py-5">
     
         {% if product.picture %}
             <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
@@ -25,7 +25,7 @@
             <img src="{{ asset('img/beer-default.jpg') }}" alt="Bière introuvable" class="img300">
         {% endif %}
 
-    <div class="col-md-7 p-0">
+    <div class="col-md-7 mt-3 m-auto">
 
         <h1 class="mb-5">{{ product.name }}</h1>
 
@@ -49,7 +49,7 @@
                 </tr>
                 <tr>
                     <th>Description</th>
-                    <td>{{ product.description }}</td>
+                    <td class="p-3">{{ product.description }}</td>
                 </tr>
                 <tr>
                     <th>Date d'ajout</th>
@@ -77,7 +77,7 @@
         
         {% if app.user %}
             {% if is_granted("ROLE_ADMIN") %}
-                <a class="btn btn-warning col-md-2 mt-3" href="{{ path('app_admin_products_edit', {'id': product.id}) }}">Modifier</a>
+                <a class="btn btn-warning  mt-3" href="{{ path('app_admin_products_edit', {'id': product.id}) }}">Modifier</a>
             {% endif %}
         {% else %}
             <input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier" >

@@ -17,7 +17,7 @@
 /* BOUTONS DE CONNEXION DEBUT */
 
 #connexion_btn_zone{
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .register_button{
     position: absolute;
@@ -35,7 +35,7 @@
 /*  PAGE DE BASE  -  DEBUT  */
 
 .title-page{
-    padding-top: 10px;
+    padding-top: 50px;
 }
 
 /*  PAGE DE BASE  - FIN */
@@ -45,46 +45,48 @@
 /* NAVBAR  -  DEBUT  */
 
 #logo{
-    width: 260px;
-    transition: 0.5s;
+    width: 240px;
     margin-bottom: 20px;
     margin-right: 20px;
 }
 .navbar{
-    display: flex;
-    align-items: center;
-    height: 80px;
-    background-size: cover;
+    height: 85px;
 }
 
-.navbar{
+.navbar .nav-item{
+    font-size: large;
     font-weight: 600;
-    font-size: larger;
 }
-
 .nav_container{
     background-color: #fcd80e;
     background-image: linear-gradient(to top, #ffbc00, #ffca00, #ffd800, #ffe600, #fff400);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.nav-item{
-    opacity: 0.9;
-    transition: 0.2s;
-}
-.nav-item:hover{
-    opacity: 1;
-}
 
+
+.mousses-nav, .profil-nav{
+    transition: 0.2s;
+    opacity: 0.9;
+    padding-left: 2px;
+    animation: ease-in-out;
+    border-left: solid rgb(0, 0, 0) 0px;
+}
+.mousses-nav:hover, .profil-nav:hover{
+    opacity: 1;
+    border-left: solid rgb(0, 0, 0) 5px;
+}
 
 .administration_nav{
     position: absolute;
-    right: 8%;
+    right: 9%;
 }
 .nav-cart-logo{
     position: absolute;
+    top: 20px;
     width: 30px;
-    opacity: 0.8;
+    opacity: 0.9;
+    
     right: 3%;
     transition: 0.2s;
     filter: invert(20%);
@@ -126,13 +128,15 @@
 
 /*   ACCUEIL - DEBUT  */
 
+
 .carousel-container{
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     height: 400px;
-    width: 550px;
+    width: 30%;
+    min-width: 380px;
     border-radius: 10px;
     margin: auto;
 }
@@ -165,6 +169,7 @@
 }
 .image-card{
     height: 310px;
+    max-width: 100%;
     margin-bottom: 20px;
 }
 .product-name{
@@ -273,11 +278,11 @@
 /*  CATALOGUE - FIN */
 
 
-
 /* AVATAR */
 .img80{
     height: 80px;
 }
+
 
 /* DEBUT FILTRES ADMINISTRATION */
 .form_line form{
@@ -365,3 +370,40 @@
     display: flex;
 }
 /* FIN MODAL AGE LEGAL */
+
+
+
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 200px) and (max-width: 1000px) {
+    
+    #connexion_btn_zone{
+        margin-top: 10px;
+    }
+    .register_button{
+        position: absolute;
+        right: 115px;
+    }
+    .logout_login_buttons{
+        position: absolute;
+        right: 15px;
+    }
+    .navbar{
+        height: max-content;
+    }
+    #logo{
+        width: 270px;
+
+    }
+    .nav-cart-logo{
+        right: 110px;
+        top: 58px;
+        transition: 0s;
+    }
+    .administration_nav{
+        position: unset;
+        right: unset;
+    }
+
+}

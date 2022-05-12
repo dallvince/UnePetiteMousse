@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Styles{% endblock %}
+{% block title %}Modifier le style | {{ parent() }} {% endblock %}
+
+{% block h1 %}Modifier un style{% endblock %}
 
 {% block body %}
-    <h1>Edit Styles</h1>
 
     {{ include('admin_styles/_form.html.twig', {'button_label': 'Update'}) }}
 

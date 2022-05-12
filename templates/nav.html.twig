@@ -3,7 +3,7 @@
     <div class="bg-navbar"></div>
   </div>
   <nav class="navbar navbar-expand-lg navbar-light p-3">
-    <div class="container-fluid">
+    <div class="container-fluid container-nav">
       <a class="navbar-brand fw-bold fs-2" href="{{ path('app_home')}}"><img title="Accueil" id='logo' src="{{ asset("/img/nav/Logo.png")}}" alt="Logo et Accueil"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,15 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{path('catalogue')}}"><p class="nos-mousses">Nos Mousses</p></a>
+            <a class="nav-link active" aria-current="page" href="{{path('catalogue')}}"><p class="mousses-nav"> Nos Mousses</p></a>
           </li>
           {% if app.user %}
-            <li>
-              <a class="dropdown-item" href="{{path('app_profil')}}">Profil</a>
+            <li class="nav-item">
+              <a class="nav-link active"  aria-current="page" href="{{path('app_profil')}}"><p class="profil-nav"> Profil</p></a>
             </li>
+        
             {% if is_granted("ROLE_ADMIN") %}
             <div class="administration_nav">
-              <li class="nav-item dropdown ">
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-danger" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% if is_granted('ROLE_ADMIN') %}
                   Tableau de Bord
@@ -28,36 +29,32 @@
                 {% endif %}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
                   {% if is_granted("ROLE_ADMIN") %}
                     <li><a class="dropdown-item" href="{{ path('app_admin_products_index') }}">Gestion des Bières</a></li>
                     <li><a class="dropdown-item" href="{{ path('app_admin_styles_index') }}">Gestion des Styles</a></li>
                     <li><a class="dropdown-item" href="{{ path('app_admin_brewries_index') }}">Gestion des Brasseries</a></li>
                   {% endif %}
-                    
                 </ul>
               </li>
-              </div>
+            </div>
             {% endif %}
           {% endif %}
-          <li>
-            <a href="{{path('app_cart')}}"><img class="nav-cart-logo"  src="{{ asset('/img/nav/cart.svg')}}" alt=""></a>
-          </li>
         </ul>
       </div>
     </div>
+     <a href="{{path('app_cart')}}"><img class="nav-cart-logo"  src="{{ asset('/img/nav/cart.svg')}}" alt=""></a>
   </nav>
 </div>
 
   {# ZONE DE CONNEXION #}
   <div id="connexion_btn_zone">
     {% if not app.user  %}
-      <div class="nav-item register_button">
+      <div class="register_button">
         <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
       </div>
     {% endif %}
     {% if not app.user  %}
-      <div class="logout_login_buttons">
+      <div class="logout_login_buttons active">
         <a class="btn btn-success text-light" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
       </div>
     {% endif %}
@@ -68,4 +65,3 @@
     {% endif %}
   </div>
 
-</nav>
