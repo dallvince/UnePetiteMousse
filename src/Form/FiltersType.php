@@ -51,12 +51,14 @@ class FiltersType extends AbstractType
             ])
             ->add('minPrice', TextType::class, [
                 "attr" => [
+                    "class" => "Price",
                     "placeholder" => "Prix Minimum"
                     ],
                 "required" => false
             ])
             ->add('maxPrice', TextType::class, [
                 "attr" => [
+                "class" => "Price",
                 "placeholder" => "Prix Maximum"
                 ],
                 "required" => false

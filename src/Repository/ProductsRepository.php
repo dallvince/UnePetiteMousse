@@ -8,6 +8,7 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Component\Notifier\Channel\BrowserChannel;
 
 /**
  * @extends ServiceEntityRepository<Products>
@@ -87,15 +88,18 @@ class ProductsRepository extends ServiceEntityRepository
     public function findFilters(ProductsFilters $filter)
     {
         $query =  $this->createQueryBuilder("p")
-        ->leftJoin("p.brewries", "brewry")
-        ->leftJoin("brewry.countries", "countries")
+        ->leftJoin("p.brewries", "b")
+        ->leftJoin("b.countries", "c")
+        ->leftJoin("p.styles", "st")
         ;
 
         if($filter->search)
         {
             $query = $query
             ->andWhere('p.name LIKE :search')
+            ->orWhere("b.name LIKE :search")
             ->orWhere('p.description LIKE :search')
+            ->orWhere('c.name LIKE :search')
             ->setParameter("search", "%$filter->search%")
             ;
         }
@@ -111,7 +115,7 @@ class ProductsRepository extends ServiceEntityRepository
         if($filter->maxPrice)
         {
             $query = $query
-            ->andwhere('p.price >= :max')
+            ->andwhere('p.price <= :max')
             ->setParameter("max", $filter->maxPrice)
             ;
         }
@@ -119,15 +123,15 @@ class ProductsRepository extends ServiceEntityRepository
         if($filter->style)
         {
             $query = $query
-            ->andWhere('style.id IN (:style)')
-            ->setParameter("style", $filter->style)
+            ->andWhere('st.id IN (:st)')
+            ->setParameter("st", $filter->style)
             ;
         }
 
         if($filter->country)
         {
             $query = $query
-            ->andWhere('countries.id IN (:country)')
+            ->andWhere('c.id IN (:country)')
             ->setParameter("country", $filter->country)
             ;
         }
@@ -135,8 +139,8 @@ class ProductsRepository extends ServiceEntityRepository
         if($filter->brewry)
         {
             $query = $query
-            ->andWhere('brewries.id IN (:brewry)')
-            ->setParameter("brewry", $filter->brewry)
+            ->andWhere('b.id IN (:br)')
+            ->setParameter("br", $filter->brewry)
             ;
         }
 

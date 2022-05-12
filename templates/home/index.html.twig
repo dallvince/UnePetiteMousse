@@ -6,7 +6,11 @@
 
 {% block body %}
 
+
+    {# CAROUSEL #}
+
         <h4 class="text-warning text-center my-3">Quelques unes de nos petites mousses 🍺</h4>
+
 
         <div id="carouselExampleIndicators" class="carousel carousel-container align-items-center slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -34,4 +38,44 @@
         </button>
         </div>
 
+    {# MODALE COOKIES #}
+    <div id="cookies_container">
+        <div class="col-md-12" id="cookies">
+            <div id="cookies_text">
+                <p>Ce site utilise des cookies notamment pour sauvegarder votre panier d'achat et également pour une meilleure expérience de navigation. </p>
+            </div>
+            <div id="cookies_btn">
+                <button class="btn btn-primary btn_size" id="accept">Accepter</button>
+                <button class="btn btn-dark btn_size" id="manage">Préférences</button>
+            </div>
+        </div>
+    </div>
+
+    {# MODALE AGE LEGAL #}
+    <div id="age_container">
+        <div class="col-md-4" id="legal_age">
+            <p>Vous devez être majeur pour pouvoir accéder au site</p>
+            <div id="age">
+                <button class="btn btn-primary me-2" id="majeur">J'ai plus de 18 ans</button>
+                <button class="btn btn-dark ms-2" id="mineur">J'ai moins de 18 ans</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+    {# JAVASCRIPT #}
+{% block javascripts %}
+    <script>
+    {# COOKIES MESSAGE #}
+        document.getElementById('accept').addEventListener('click', function(){
+            document.getElementById('cookies_container').style.display = "none";
+        });
+
+    // LEGAL AGE MESSAGE
+        document.getElementById('majeur').addEventListener('click', function(){
+            document.getElementById('age_container').style.display = "none";
+        });
+    </script>
+    
 {% endblock %}
