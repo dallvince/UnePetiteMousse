@@ -13,8 +13,10 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{path('catalogue')}}"><p class="nos-mousses">Nos Mousses</p></a>
           </li>
-
           {% if app.user %}
+            <li>
+              <a class="dropdown-item" href="{{path('app_profil')}}">Profil</a>
+            </li>
             {% if is_granted("ROLE_ADMIN") %}
             <div class="administration_nav">
               <li class="nav-item dropdown ">
@@ -26,9 +28,13 @@
                 {% endif %}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{{ path('app_admin_products_index') }}">Gestion des Bières</a></li>
-                  <li><a class="dropdown-item" href="{{ path('app_admin_styles_index') }}">Gestion des Styles</a></li>
-                  <li><a class="dropdown-item" href="{{ path('app_admin_brewries_index') }}">Gestion des Brasseries</a></li>
+
+                  {% if is_granted("ROLE_ADMIN") %}
+                    <li><a class="dropdown-item" href="{{ path('app_admin_products_index') }}">Gestion des Bières</a></li>
+                    <li><a class="dropdown-item" href="{{ path('app_admin_styles_index') }}">Gestion des Styles</a></li>
+                    <li><a class="dropdown-item" href="{{ path('app_admin_brewries_index') }}">Gestion des Brasseries</a></li>
+                  {% endif %}
+                    
                 </ul>
               </li>
               </div>

@@ -8,13 +8,15 @@
 
     <div class="col-md-8 m-auto">
         {{ form_start(formProfil)}}
-            {{ form_row(formProfil.pseudo)}}
-            {{ form_row(formProfil.email)}}
+            {# {{ form_row(formProfil.pseudo)}} #}
+            {# {{ form_row(formProfil.email)}} #}
             {{ form_row(formProfil.adress)}}
             {{ form_row(formProfil.country)}}
             {{ form_row(formProfil.zip)}}
             {{ form_row(formProfil.info)}}
-            {# {{ form_row(formProfil.password)}} #}
+            {{ form_row(formProfil.plainPassword)}}
+            {{ form_row(formProfil.avatarUpdate)}}
+        
             <div class="d-flex justify-content-center">
                 <input type="submit" value="Modifier" class="btn btn-warning col-md-2 mt-3">
             </div>
@@ -27,8 +29,17 @@
             </div>
         {{ form_end(formProfil)}}
 
+        {# {{ form_start(formMDP)}}
+                {{ form_row(formMDP.plainPassword)}}
+                <input type="submit" value="Mettre à jour" class="btn btn-warning col-md-2 mt-3">
+        {{ form_end(formMDP)}} #}
+
+
     </div>
 
     <div class="d-flex justify-content-center">
     </div>
+
+    
+
 {% endblock %}

@@ -33,11 +33,19 @@
                     {% else %}
                         <img src="{{ asset('img/imageDefault.png') }}" alt="" class="img80">
                     {% endif %}
-                    </td>
+                </td>
+                <td>
+                    <a href="{{ path('app_profil_delete', {'id': users.id}) }}" onclick="return confirm('Souhaitez vous vraiment supprimer votre compte ?')"><i class="fa-solid fa-trash text-danger"></i></a>
+                </td>
             </tr>
         </tbody>
     </table>
     </div>
+
+    <form method="post" action="{{ path('app_profil_delete', {'id': users.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ users.id) }}">
+        <button class="btn">Delete</button>
+    </form>
 
     <a href="{{ path('app_profil_edit', {'id': users.id}) }}"><button type="submit" class="btn btn-success">Modifier</button></a>
 

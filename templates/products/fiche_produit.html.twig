@@ -1,17 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Products{% endblock %}
+{% block title %}{{ parent()}} | {{ product.name|capitalize }}{% endblock %}
+
+{% block h1 %}{{ product.name|capitalize }}{% endblock %}
 
 {% block body %}
 
-<div class="col-md-11 mx-auto">
-    <a class="btn btn-dark" href="{{ path('app_admin_products_index') }}">back to list</a>
-</div>
+     {# Flash d'ajout au PANIER #}
+    {% for notification in app.flashes('panier') %}
 
-<div class="row justify-content-center">
-    <div class="col-md-3 p-0 d-flex align-items-center justify-content-center">
-        <td><img src="{{asset('img/upload/' ~ product.picture)}}" alt=""></td>
+    <div class="col-md-6 mx-auto alert alert-success text-center">
+    {{ notification }}
     </div>
+
+    {% endfor %}
+
+    <a class="btn btn-dark mt-3" href="{{ path('catalogue') }}">Catalogue</a>
+
+    <div class="shadow col-md-6 mx-auto text-center m-4 p-4">
+    
+        {% if product.picture %}
+            <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
+        {% else %}
+            <img src="{{ asset('img/beer-default.jpg') }}" alt="Bière introuvable" class="img300">
+        {% endif %}
 
     <div class="col-md-7 p-0">
 
