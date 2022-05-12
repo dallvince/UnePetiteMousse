@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Brewries{% endblock %}
+{% block title %}Modifier une brasserie | {{ parent() }} {% endblock %}
+
+{% block h1 %}Modifier une brasserie{% endblock %}
 
 {% block body %}
-    <h1>Edit Brewries</h1>
+
 
     <a class="btn btn-secondary ms-3" href="{{ path('app_admin_products_index') }}">Retour</a>
 
