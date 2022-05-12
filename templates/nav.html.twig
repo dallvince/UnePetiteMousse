@@ -55,17 +55,17 @@
       <div class="nav-item register_button">
         <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
       </div>
-      {% endif %}
-      {% if not app.user  %}
+    {% endif %}
+    {% if not app.user  %}
       <div class="logout_login_buttons">
         <a class="btn btn-success text-light" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
       </div>
-      {% endif %}
-      {% if app.user  %}
+    {% endif %}
+    {% if app.user  %}
       <div class="logout_login_buttons">
         <a class="btn btn-danger text-light" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
       </div>
-      {% endif %}
+    {% endif %}
   </div>
 
 </nav>

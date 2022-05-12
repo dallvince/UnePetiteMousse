@@ -25,18 +25,67 @@
             <img src="{{ asset('img/beer-default.jpg') }}" alt="Bière introuvable" class="img300">
         {% endif %}
 
-        <h3>{{ product.price }} €</h3>
+    <div class="col-md-7 p-0">
 
-        <h3>Description :</h3>
+        <h1 class="mb-5">{{ product.name }}</h1>
 
-        <p>
-            {% if product.description %}
-                {{ product.description }}
-            {% else %}
-                <span class="text-secondary fst-italic">Non renseignée</span>
-            {% endif %}  
-        </p>
+        <table class="table mt-5">
+            <tbody>
+                <tr>
+                    <th>Brasserie</th>
+                    <td>{{ product.brewries.name }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Pays d'origine</th>
+                    <td>{{ product.brewries.countries.flag }} {{ product.brewries.countries.name }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ product.price }} €</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ product.description }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'ajout</th>
+                    <td>{{ product.createdAt ? product.createdAt|date('Y-m-d 🕐 H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Titre alcoolique</th>
+                    <td>{{ product.abv }}% VOL</td>
+                </tr>
+                <tr>
+                    <th>Degré d'amertume</th>
+                    <td>{{ product.ebc }} EBC</td>
+                </tr>
+                <tr>
+                    <th>Sans glutène</th>
+                    <td>{{ product.glutenfree }}</td>
+                </tr>
+                <tr>
+                    <th>Biologique</th>
+                    <td>{{ product.organic }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        {% if app.user %}
+            {% if is_granted("ROLE_ADMIN") %}
+                <a class="btn btn-warning col-md-2 mt-3" href="{{ path('app_admin_products_edit', {'id': product.id}) }}">Modifier</a>
+            {% endif %}
+        {% else %}
+            <input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier" >
+            {# <a href="#">Ajouter au panier</a> #}
+        {% endif %}
+
     </div>
+</div>
 
 
 {% endblock %}

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Form\FiltersType;
 use App\Form\ProductsType;
+use App\filters\ProductsFilters;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,14 +21,23 @@ class AdminProductsController extends AbstractController
     /**
      * @Route("/", name="app_admin_products_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, ProductsRepository $repoProduct, Request $request): Response
     {
+
+        $filter = new ProductsFilters;
+        $form = $this->createForm(FiltersType::class, $filter);
+        $form->handleRequest($request);
+
+        $products = $repoProduct->findFilters($filter);
+
+
         $products = $entityManager
             ->getRepository(Products::class)
             ->findAll();
 
         return $this->render('admin_products/index.html.twig', [
             'products' => $products,
+            'formFilter' => $form->createView()
         ]);
     }
 
