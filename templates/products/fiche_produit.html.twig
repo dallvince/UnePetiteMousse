@@ -1,33 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent()}} | {{ product.name|capitalize }}{% endblock %}
-
-{% block h1 %}{{ produit.name|capitalize }}{% endblock %}
+{% block title %}Products{% endblock %}
 
 {% block body %}
 
-    <a class="btn btn-dark mt-3" href="{{ path('catalogue') }}">Catalogue</a>
+<div class="col-md-11 mx-auto">
+    <a class="btn btn-dark" href="{{ path('app_admin_products_index') }}">back to list</a>
+</div>
 
-    <div class="shadow col-md-6 mx-auto text-center m-4 p-4">
-    
-        {% if produit.image %}
-            <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
+<div class="row justify-content-center">
+    <div class="col-md-3 p-0 d-flex align-items-center justify-content-center">
+        <td><img src="{{asset('img/upload/' ~ product.picture)}}" alt=""></td>
+    </div>
+
+    <div class="col-md-7 p-0">
+
+        <h1 class="mb-5">{{ product.name }}</h1>
+
+        <table class="table mt-5">
+            <tbody>
+                <tr>
+                    <th>Brasserie</th>
+                    <td>{{ product.brewries.name }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Pays d'origine</th>
+                    <td>{{ product.brewries.countries.flag }} {{ product.brewries.countries.name }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ product.price }} €</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ product.description }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'ajout</th>
+                    <td>{{ product.createdAt ? product.createdAt|date('Y-m-d 🕐 H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Titre alcoolique</th>
+                    <td>{{ product.abv }}% VOL</td>
+                </tr>
+                <tr>
+                    <th>Degré d'amertume</th>
+                    <td>{{ product.ebc }} EBC</td>
+                </tr>
+                <tr>
+                    <th>Sans glutène</th>
+                    <td>{{ product.glutenfree }}</td>
+                </tr>
+                <tr>
+                    <th>Biologique</th>
+                    <td>{{ product.organic }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        {% if app.user %}
+            {% if is_granted("ROLE_ADMIN") %}
+                <a class="btn btn-warning col-md-2 mt-3" href="{{ path('app_admin_products_edit', {'id': product.id}) }}">Modifier</a>
+            {% endif %}
         {% else %}
-            <img src="{{ asset('img/imageDefault.png') }}" alt="" class="img300">
+            <input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier" >
+            {# <a href="#">Ajouter au panier</a> #}
         {% endif %}
 
-        <h3>{{ product.price }} €</h3>
-
-        <h3>Description :</h3>
-
-        <p>
-            {% if product.description %}
-                {{ product.description }}
-            {% else %}
-                <span class="text-secondary fst-italic">Non renseignée</span>
-            {% endif %}  
-        </p>
     </div>
+</div>
 
 
 {% endblock %}
