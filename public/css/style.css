@@ -273,6 +273,12 @@
 /*  CATALOGUE - FIN */
 
 
+
+/* AVATAR */
+.img80{
+    height: 80px;
+}
+
 /* DEBUT FILTRES ADMINISTRATION */
 .form_line form{
     display: flex;
@@ -359,3 +365,4 @@
     display: flex;
 }
 /* FIN MODAL AGE LEGAL */
+
