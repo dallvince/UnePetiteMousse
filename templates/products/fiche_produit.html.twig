@@ -2,18 +2,27 @@
 
 {% block title %}{{ parent()}} | {{ product.name|capitalize }}{% endblock %}
 
-{% block h1 %}{{ produit.name|capitalize }}{% endblock %}
+{% block h1 %}{{ product.name|capitalize }}{% endblock %}
 
 {% block body %}
+
+     {# Flash d'ajout au PANIER #}
+    {% for notification in app.flashes('panier') %}
+
+    <div class="col-md-6 mx-auto alert alert-success text-center">
+    {{ notification }}
+    </div>
+
+    {% endfor %}
 
     <a class="btn btn-dark mt-3" href="{{ path('catalogue') }}">Catalogue</a>
 
     <div class="shadow col-md-6 mx-auto text-center m-4 p-4">
     
-        {% if produit.image %}
+        {% if product.picture %}
             <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
         {% else %}
-            <img src="{{ asset('img/imageDefault.png') }}" alt="" class="img300">
+            <img src="{{ asset('img/beer-default.jpg') }}" alt="Bière introuvable" class="img300">
         {% endif %}
 
         <h3>{{ product.price }} €</h3>
