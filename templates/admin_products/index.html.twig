@@ -62,7 +62,7 @@
             <tr>
                 <td>{{ product.name|upper }}</td>
                 <td><p title="{{ product.brewries.countries.name }}">{{ product.brewries.countries.flag }}</p></td>
-                <td>{{ product.price }}</td>
+                <td>{{ product.price|number_format(2) }}</td>
                 <td>{% if product.description|length > 100 %}
                     {{ product.description|slice(0,100) }}...
                 {% else %}
