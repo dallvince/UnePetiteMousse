@@ -43,9 +43,9 @@
     <div id="cookies_container">
         <div class="col-md-12" id="cookies">
             <div id="cookies_text">
-                <p>Ce site utilise des cookies notamment pour sauvegarder votre panier d'achat et également pour une meilleure expérience de navigation. </p>
+                <p>Ce site utilise des cookies.<p class="cookies_text_query_1"> Notamment pour sauvegarder votre panier d'achat et également pour une meilleure expérience de navigation.</p> Veuillez les accepter.</p>
             </div>
-            <div id="cookies_btn">
+            <div class="cookies_btn">
                 <button class="btn btn-primary btn_size" id="accept">Accepter</button>
                 <button class="btn btn-dark btn_size" id="manage">Préférences</button>
             </div>
@@ -55,10 +55,16 @@
     {# MODALE AGE LEGAL #}
     <div id="age_container">
         <div class="col-md-4" id="legal_age">
-            <p>Vous devez être majeur pour pouvoir accéder au site</p>
-            <div id="age">
-                <button class="btn btn-primary me-2" id="majeur">J'ai plus de 18 ans</button>
-                <button class="btn btn-dark ms-2" id="mineur">J'ai moins de 18 ans</button>
+            <p>Vous devez être majeur pour pouvoir accéder au site.</p>
+            <div class="btn-age-container col-10" >
+                <div class="text-center age-btn">
+                    <label for="">Je suis majeur</label>
+                    <button class="btn btn-success mt-2" id="majeur">Entrer</button>
+                </div>
+                <div class="text-center age-btn">
+                    <label for="">Je suis mineur</label>
+                    <button class="btn btn-danger mt-2" id="mineur">Partir</button>
+                </div>
             </div>
         </div>
     </div>

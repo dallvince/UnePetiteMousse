@@ -5,6 +5,7 @@
 }
 
 
+
 /* LOGIN & REGISTER FORMS         DEBUT  */
 
 .form-check{
@@ -48,6 +49,8 @@
     width: 240px;
     margin-bottom: 20px;
     margin-right: 20px;
+    -webkit-animation: slide-in-left 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: slide-in-left 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 .navbar{
     height: 85px;
@@ -86,7 +89,6 @@
     top: 20px;
     width: 30px;
     opacity: 0.9;
-    
     right: 3%;
     transition: 0.2s;
     filter: invert(20%);
@@ -278,6 +280,12 @@
 /*  CATALOGUE - FIN */
 
 
+/*  RESET PASSWORD - DEBUT */
+
+
+
+/*  RESET PASSWORD - FIN */
+
 /* AVATAR */
 .img80{
     height: 80px;
@@ -298,23 +306,15 @@
 }
 /* FIN FILTRES ADMINISTRATION */
 
+
+
 /* DEBUT COOKIES */
-/* #cookies_container{
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    margin: auto;
-    top: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.4); */
-    /* display: none; */
-    /* width: 100%;
-    height: 100%;
-    z-index: 2;
-} */
+
 #cookies{
-    height: 100px;
-    background-color: #FFD866;
+    height: 200px;
+    padding-left: 20px;
+    width: 100%;
+    background-image: linear-gradient(to top, #ffc200, #ffce00, #ffdb00, #ffe700, #fff400);
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -325,12 +325,24 @@
     bottom: 0;
     z-index: 3;
     box-shadow: 0 10px 10px 5px;;
+    justify-content: space-around;
+}
+#cookies_text{
+    font-size: 1em;
+}
+.cookies_btn{
+    display:flex;
+    justify-content: center;
 }
 .btn_size{
-    width: 150px;
+    width: 40%;
     height: 40px;
     margin: 20px;
 }
+.cookies_text_query_2{
+    display: none;
+}
+
 /* FIN COOKIES */
 
 /* DEBUT MODAL AGE LEGAL */
@@ -348,9 +360,25 @@
     width: 100%;
     height: 100%;
     z-index: 2;
+   
 }
+.btn-age-container{
+    display: flex;
+    justify-content: space-around;
+
+}
+.age-btn > button{
+    width: 100px;
+    transition: 0.3s;
+    animation: ease-in-out;
+}
+.age-btn > button:hover{
+    width: 120px;
+}
+
 #legal_age{
-    background-color: #FFD866;
+    border: solid 2px #ffe100;
+    background-image: linear-gradient(to top, #ffc200, #ffce00, #ffdb00, #ffe700, #fff400);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -364,17 +392,131 @@
 }
 #legal_age p{
     font-weight: bold;
+    font-size: 1.2em;
     text-decoration: underline;
+    width: 80%;
+    text-align: center;
 }
-#age{
+.age-btn{
     display: flex;
+    flex-direction: column;
 }
+
 /* FIN MODAL AGE LEGAL */
 
 
 
 
+/*   FOOTER  -  DEBUT   */
+
+footer{
+    font-size: small;
+    margin-top: 70px;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
+    height:  max-content;
+    min-height: 400px;
+    background-color: #fcd80e;
+    background-image: linear-gradient(to top, #ffbc00, #ffca00, #ffd800, #ffe600, #fff400);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.footer-titles{
+    padding-left: 5px;
+    border-left: solid rgb(0, 0, 0) 0px;
+    transition: 0.2s;
+    animation: ease-in-out;
+}
+.footer-titles:hover{
+    border-left: solid rgb(0, 0, 0) 5px;
+}
+.footer-container{
+    display: flex;
+    flex-direction: row;
+}
+.block_contact_infos{
+    margin-bottom: 10px;
+}
+
+.Localisation{
+    display: flex;
+    flex-direction: column;
+}
+.footer-container .container {
+    padding-bottom: 180px;
+    padding-top: 30px;
+}
+.container {
+    width: 80%;
+}
+.footer-container #footer .footer-block {
+    margin-top: 45px;
+}
+.list-icons-socials{
+    display: flex;
+    justify-content: center;
+}
+.social-icons{
+    opacity: 0.8;
+    transition: 0.6s;
+}
+.social-icons:hover{
+    opacity: 1;
+}
+.copyright{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+iframe{
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.imgteam{
+    width: 80%;
+}
+
+/*   FOOTER  -  FIN   */
+
+
+
+
 /* MEDIA QUERIES */
+
+@media screen and (max-width: 1500px) {
+    .Localisation{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    #legal_age{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        z-index: 3;
+    }
+
+    .btn-age-container{
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 10px;
+    }
+    .age-btn > button{
+       margin: auto;
+    }
+    .cookies_text_query_1{
+        display: none;
+    }
+    .cookies_text_query_2{
+        display: flex;
+    }
+}
 
 @media screen and (min-width: 200px) and (max-width: 1000px) {
     
@@ -394,7 +536,6 @@
     }
     #logo{
         width: 270px;
-
     }
     .nav-cart-logo{
         right: 110px;
@@ -404,6 +545,50 @@
     .administration_nav{
         position: unset;
         right: unset;
-    }
-
+    } 
+    
 }
+
+
+
+/* ANIMATIONS */
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-5-13 16:25:34
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-bottom
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+  
