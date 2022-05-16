@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stocks{% endblock %}
+
+{% block body %}
+    <h1>Stocks</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stock.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ stock.quantity }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ stock.UpdatedAt ? stock.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_stocks_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_stocks_edit', {'id': stock.id}) }}">edit</a>
+
+    {{ include('admin_stocks/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des stocks | {{ parent()}} {% endblock %}
+
+{% block h1 %}Gestion des stocks{% endblock %}
+
+{% block body %}
+
+<div class="row col-11 d-flex m-auto align-items-center form_line">
+        {{ form_start(formFilter) }}
+
+            <div class="col-2"> {{ form_row(formFilter.search) }} </div>
+                
+            <div class="col-2">{{ form_row(formFilter.brewry) }}</div>
+
+            <div class="col-2">{{ form_row(formFilter.country) }}</div>
+
+            <div class="col-2">{{ form_row(formFilter.style) }}</div>
+
+            <div class="col-2">{{ form_row(formFilter.order) }}</div>
+
+            <input type="submit" value="Rechercher" class="btn btn-primary">
+
+        {{ form_end(formFilter) }}
+    </div>
+
+    <div class="d-flex table-responsive">
+        <table class="table table-striped table-hover text-center mt-3 mx-5 m-auto">
+            <thead class="bg-dark text-white">
+            <thead>
+                <tr>
+                    <th>Nom produit</th>
+                    <th>Quantité</th>
+                    <th>Dernier ajout</th>
+                    <th>Ajout</th>
+                    <th>Corriger</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.stocks.quantity }}</td>
+                    <td>{{ product.stocks.UpdatedAt ? product.stocks.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td><input type="integer"></td>
+                    <td>
+                        <a href="{{ path('app_admin_stocks_edit', {'id': product.stocks.id}) }}"><i class="fa-solid fa-file-excel"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Entity\Stocks;
 use App\Form\FiltersType;
 use App\Form\ProductsType;
 use App\filters\ProductsFilters;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/admin/products")
@@ -19,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminProductsController extends AbstractController
 {
     /**
-     * @Route("/", name="app_admin_products_index", methods={"GET"})
+     * @Route("/", name="app_admin_products_index", methods={"GET", "POST"})
      */
     public function index(EntityManagerInterface $entityManager, ProductsRepository $repoProduct, Request $request): Response
     {
@@ -29,11 +31,6 @@ class AdminProductsController extends AbstractController
         $form->handleRequest($request);
 
         $products = $repoProduct->findFilters($filter);
-
-
-        $products = $entityManager
-            ->getRepository(Products::class)
-            ->findAll();
 
         return $this->render('admin_products/index.html.twig', [
             'products' => $products,
@@ -52,6 +49,11 @@ class AdminProductsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $stock = new Stocks;
+            $stock->setUpdatedAt(new \DateTimeImmutable('now'));
+            $entityManager->persist($stock);
+            $entityManager->flush();
+
             $product->setCreatedAt(new \DateTimeImmutable('now'));
             $entityManager->persist($product);
 
@@ -65,6 +67,8 @@ class AdminProductsController extends AbstractController
 
                 $product->setPicture($pictureName);
             }
+
+            $product->setStocks($stock);
 
             $entityManager->persist($product);
             $entityManager->flush();
@@ -166,5 +170,30 @@ class AdminProductsController extends AbstractController
             $this->addFlash("error", "Ce produit n'a pas d'image");
             return $this->redirectToRoute('app_admin_products_show');
         }
+    }
+
+    /**
+     * @Route("/change/status/product", name="change_status_product", methods={"POST"})
+     */
+    public function change_status_product(Request $request, ProductsRepository $repoProduct, EntityManagerInterface $manager)
+    {
+        // request->request ===> $_POST[]
+        $id = $request->request->get('id');
+
+        $product = $repoProduct->find($id);
+
+        if($product->getStatus() == 0)
+        {
+            $product->setStatus(1);
+            // $message ='Produit activé';
+        } else {
+            $product->setStatus(0);
+            // $message = 'Produit désactivé';
+        }
+        
+        $manager->persist($product);
+        $manager->flush();
+
+        return new JsonResponse();
     }
 }

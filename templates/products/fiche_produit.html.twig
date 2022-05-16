@@ -18,6 +18,33 @@
     <a class="btn btn-dark mt-3 ms-5" href="{{ path('catalogue') }}">Catalogue</a>
 
     <div class="shadow col-md-8 mx-auto text-center m-4 py-5">
+
+    {% if product.stocks.quantity > 0 %}
+        <form action="{{ path("add_basket")}}" method="post">
+
+            <select name="quantity" class="form-control">
+
+
+                {% if product.stocks.quantity > 10 %}
+                    {% set quantity = 10 %}
+                {% else %}
+                    {% set quantity = product.stocks.quantity %}
+                {% endif %}
+
+
+                {% for i in 1..quantity %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+
+            <input type="hidden" name="product" value="{{product.id}}">
+
+            <input type="submit" value="Ajouter au panier" class="btn btn-success">
+
+        </form>
+    {% else %}
+        RUPTURE
+    {% endif %}
     
         {% if product.picture %}
             <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
