@@ -6,8 +6,9 @@
 
 {% block body %}
 
+<a class="btn btn-secondary ms-3" href="{{ path('app_admin_brewries_index') }}">Retour</a>
 
-    <a class="btn btn-secondary ms-3" href="{{ path('app_admin_products_index') }}">Retour</a>
+    
 
     <div class="col-md-10 mx-auto">
         {{ form_start(form)}}
@@ -19,6 +20,7 @@
                 <input type="submit" value="Modifier" class="btn btn-warning col-md-2 mt-3">
             </div>
         {{ form_end(form)}}
+    </div>
 
 
 {% endblock %}

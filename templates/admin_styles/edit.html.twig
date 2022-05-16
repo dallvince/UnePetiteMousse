@@ -5,10 +5,10 @@
 {% block h1 %}Modifier un style{% endblock %}
 
 {% block body %}
+    
+<a class="btn btn-secondary ms-3" href="{{ path('app_admin_styles_index') }}">Retour</a>
 
-    {{ include('admin_styles/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_styles_index') }}">back to list</a>
-
-    {{ include('admin_styles/_delete_form.html.twig') }}
+    <div class="col-md-8 m-auto">
+        <div class="mt-3">{{ include('admin_styles/_form.html.twig', {'button_label': 'Mettre à jour'}) }}</div>
+    </div>
 {% endblock %}

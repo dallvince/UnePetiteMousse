@@ -29,7 +29,7 @@
     {{ form_end(formFilter) }}
     </div>
 
-    <div class="row all-catalogue-container justify-content-center col-md-9">
+    <div class="row all-catalogue-container justify-content-center col-md-10">
         {% for product in products %}
             {% if product.status == 1 %}
                 <div class="col-md-3 product-card-container m-4" href="{{ path("fiche_produit", {'id': product.id} ) }}">
@@ -56,6 +56,31 @@
                     <a class="link-deco voir-eye" href="{{  path("fiche_produit", {'id': product.id} )  }}">👁️</a>
                     <p title="{{ product.brewries.countries.name }}">{{ product.brewries.countries.flag }}</p>
                     </div>
+            <div class="col-md-3 product-card-container m-3" href="{{ path("fiche_produit", {'id': product.id} ) }}">
+                <div class="top-card">
+                    <a class="link-deco" href="{{  path("fiche_produit", {'id': product.id} )  }}" ><h5 class="text-center catalogue-product-title">{{ product.name|capitalize }}</h5></a>
+                    <h6 class="product-styles text-center" > 🍻 {{ product.brewries.name }} - {{ product.styles.name }}</h6>
+                </div>
+                
+                <div class="text-center py-2">
+                    {% if product.picture %}
+                        <a href="{{  path("fiche_produit", {'id': product.id} )  }}"><img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="imgcatalogue"></a>
+                    {% else %}
+                        <img src="{{ asset('img/beer-default.png')}}" alt="" class="img150">
+                    {% endif %}
+                </div> 
+
+                <h5 class="text-center mt-2">{{ product.price|number_format(2) }} €</h5>
+                <div class="text-center">
+                    <a href="{{ path("fiche_produit", {"id" : product.id}) }}">
+                        <i class="text-warning" data-feather="eye"></i>
+                    </a>  
+                </div>
+                <a href="{{ path('cart_add', {'id': product.id}) }}"><input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier"></a>
+                <div class=" d-flex card-bottom justify-content-between">
+                <a class="link-deco voir-eye" href="{{  path("fiche_produit", {'id': product.id} )  }}">👁️</a>
+                <p title="{{ product.brewries.countries.name }}">{{ product.brewries.countries.flag }}</p>
+                </div>
 
                 </div>
                 {% else %}

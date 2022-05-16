@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class BrewriesType extends AbstractType
@@ -15,10 +16,13 @@ class BrewriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                "label" => "Nom de la brasserie",                 
+            ])
             ->add('description')
             ->add('countries', EntityType::class, [
                 "class" => Countries::class,
+                "label" => "Pays",
                 "choice_label" => function ($countries) 
                 {
                     return $countries->getFlag() . " " . $countries->getName();
