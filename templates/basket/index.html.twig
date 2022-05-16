@@ -1,20 +1,128 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BasketController!{% endblock %}
+{% block title %}Panier{% endblock %}
+
+{% block h1 %}Panier{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% if basket.id is defined and basket.id|length > 0 %}
+        <table class="table table-striped table-hover text-center">
+            <thead >
+                <tr>
+                {# <tr id="tr{{ basket.image[i] }}"> #}
+                    {# <th>ID</th> #}
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Prix (€)</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Supprimé</th>
+                </tr>
+            </thead>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Etudiant/Documents/GitHub/UnePetiteMousse/src/Controller/BasketController.php'|file_link(0) }}">src/Controller/BasketController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Etudiant/Documents/GitHub/UnePetiteMousse/templates/basket/index.html.twig'|file_link(0) }}">templates/basket/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <tbody>
+
+                {% set size = basket.id|length -1 %}
+
+                {% for i in 0..size %}
+                    <tr>
+                        {# <td>{{ basket.id[i] }}</td> #}
+                        <td>
+                            {% if basket.image[i] %}
+                                <img src="{{ asset('img/upload/' ~ basket.image[i]) }}" alt="" class="img300">
+                            {% else %}
+                                <img src="{{ asset('img/beer-default.jpg') }}" alt="" class="img300">
+                            {% endif %}
+                        </td>
+                        <td>{{ basket.title[i] }}</td>
+                        <td>{{ basket.price[i] }}</td>
+
+
+
+                        <td>
+                            <span class="quantityChange" data-value="{{ basket.id[i] }}" data-what="moins">-</span>
+                            <span id="newQuantity">{{ basket.quantity[i] }}</span>
+                            <span class="quantityChange" data-value="{{ basket.id[i] }}" data-what="plus">+</span>
+                        </td>
+
+
+
+
+
+                        <td id="montant">{{ basket.price[i] * basket.quantity[i]}}</td>
+                        <td>
+                            <a href="{{ path('basket_remove', {"id" : basket.id[i]})}}">
+                                <i class="fa fa-trash text-danger"></i></a>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+                    <td colspan="4">Total</td>
+                    <td id="montantTotal">{{ montant }}€</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row justify-content-between">
+            <a class="btn btn-danger col-md-3" href="{{ path("basket_remove_all") }}">Vider le panier</a>
+            <a class="btn btn-success col-md-3" href="">Payer</a>
+        </div>
+
+    {% else %}
+        <h4 class="text-center mt-3">Votre panier est vide</h4>
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        let quantityChange = $('.quantityChange');
+        let newQuantity = $('#newQuantity');
+        let montant = $('#montant');
+        let montantTotal = $('#montantTotal');
+
+        quantityChange.click(function(){
+        
+        let banane = {
+            "id" : $(this).data('value'),
+            "what" : $(this).data('what'),
+        };
+
+        console.log(banane);
+
+        // Préparation de l'envoi
+        $.ajax({
+            method : 'post',
+            dataType : "json", //format json
+            url : "{{path('change_quantity')}}", // route à créer dans le controller
+            data : banane, //= données récupérées
+
+            // Réponse (retour) du controller
+            success : function (response){
+                console.log(response);
+                if(response)
+                {
+                    newQuantity.html(response['value']);
+                    montant.html(response['montant']);
+                    montantTotal.html(response['montantTotal']);
+                }
+                else
+                {
+                    let trDelete = $('#tr' + $(this).data('value'));
+                    trDelete.remove();
+                }
+            }, 
+            error: function(){
+                alert("error")
+            }
+            
+            });
+        });
+
+    </script>
+
 {% endblock %}

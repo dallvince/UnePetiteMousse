@@ -50,7 +50,10 @@
                         <i class="text-warning" data-feather="eye"></i>
                     </a>  
                 </div>
-                <a href="{{ path('cart_add', {'id': product.id}) }}"><input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier"></a>
+                <a href="{{ path('basket_add', {'id': product.id}) }}">
+                
+                <input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier"></a>
+
                 <div class=" d-flex card-bottom justify-content-between">
                 <a class="link-deco voir-eye" href="{{  path("fiche_produit", {'id': product.id} )  }}">👁️</a>
                 <p title="{{ product.brewries.countries.name }}">{{ product.brewries.countries.flag }}</p>

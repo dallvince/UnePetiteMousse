@@ -102,35 +102,7 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute('catalogue', [], Response::HTTP_SEE_OTHER);
     }
 
-     /**
-     * @Route("/{id}/pw_edit", name="app_profil_pw_edit", methods={"GET", "POST"})
-     */
-    public function pwEdit(Request $request, Users $users, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
-    {
-        $form = $this->createForm(ProfilFormType::class, $users, ["edit" => true]);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() AND $form->isValid()){
-
-            $encodedPassword = $userPasswordHasher->hashPassword(
-                $users,
-                $form->get('plainPassword')->getData()
-            );
-
-            $users->setPassword($encodedPassword);
-            $entityManager->persist($users);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Votre profil a bien été modifié !');
-            
-            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
-        }
-            return $this->renderForm('profil/passwordEdit.html.twig', [
-            'users' => $users,
-            'formProfil' => $form,
-        ]);
-    }
-
+    
     
     //  /**
     //  * @Route("/{id}/edit_profil", name="app_profil_edit", methods={"GET", "POST"})
