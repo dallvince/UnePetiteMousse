@@ -30,9 +30,9 @@
                         {# <td>{{ basket.id[i] }}</td> #}
                         <td>
                             {% if basket.image[i] %}
-                                <img src="{{ asset('img/upload/' ~ basket.image[i]) }}" alt="" class="img300">
+                                <img src="{{ asset('img/upload/' ~ basket.image[i]) }}" alt="" class="img80">
                             {% else %}
-                                <img src="{{ asset('img/beer-default.jpg') }}" alt="" class="img300">
+                                <img src="{{ asset('img/beer-default.jpg') }}" alt="" class="img80">
                             {% endif %}
                         </td>
                         <td>{{ basket.title[i] }}</td>
@@ -68,8 +68,8 @@
         </table>
 
         <div class="row justify-content-between">
-            <a class="btn btn-danger col-md-3" href="{{ path("basket_remove_all") }}">Vider le panier</a>
-            <a class="btn btn-success col-md-3" href="">Payer</a>
+            <a class="btn btn-danger col-md-3 ms-3" href="{{ path("basket_remove_all") }}">Vider le panier</a>
+            <a class="btn btn-success col-md-3 me-3" href="">Payer</a>
         </div>
 
     {% else %}
