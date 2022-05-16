@@ -82,10 +82,9 @@
                         <input class="form-check-input pasteque" type="checkbox" role="switch" id="flexSwitchCheckChecked" {% if product.status %} checked {% endif %} value="{{product.id}}">
                         <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                     </div> #}
-                    <td class="text-center">
+                <td class="text-center">
                     <div class="form-check form-switch ">
-                        <input class="form-check-input pasteque mx-auto" type="checkbox" role="switch" id="flexSwitchCheckChecked" {% if product.status %} checked {% endif %} value="{{ product.id }}"value="{{ product.id }}">
-                        
+                        <input class="form-check-input mx-auto checkStatut" type="checkbox" role="switch" id="flexSwitchCheckChecked" {% if product.status %} checked {% endif %} value="{{ product.id }}">
                         <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                     </div>
                 </td>
@@ -113,34 +112,24 @@
 
 {% block javascripts %}
     <script>
-        let pasteque = $('.pasteque');
-        console.log(pasteque);
+        let checkStatut = $('.checkStatut');
+        // console.log(checkStatut);
 
-        pasteque.change(function(){
-            console.log('test');
-        
-        let banane = {
-            "id" : $(this).val()
-        };
-
-        console.log(banane);
-
-        // Préparation de l'envoi
-        $.ajax({
-            method : 'post',
-            dataType : "json", //format json
-            url : "{{path('change_status_product')}}", // route à créer dans le controller
-            data : banane, //= données récupérées
-
-            // Réponse (retour) du controller
-            success : function (response){
-                console.log(response);
-            }, 
-            error: function(){
-                alert("error")
+        checkStatut.change(function(){
+            // console.log('test');
+            let data = {
+                'id' : $(this).val()
             }
-            
-            });
+            // console.log(data);
+
+            $.ajax({
+                method : 'post',
+                dataType : 'json',
+                url : '{{ path('change_status_product') }}',
+                data : data
+
+            })
+
         });
 
     </script>
