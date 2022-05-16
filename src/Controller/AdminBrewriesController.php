@@ -43,6 +43,8 @@ class AdminBrewriesController extends AbstractController
             $entityManager->persist($brewry);
             $entityManager->flush();
 
+            $this->addFlash('success', 'La Brasserie a bien été ajoutée !');
+
             return $this->redirectToRoute('app_admin_brewries_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -72,6 +74,8 @@ class AdminBrewriesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
+            $this->addFlash('success', 'La Brasserie a bien été modifiée !');
 
             return $this->redirectToRoute('app_admin_brewries_index', [], Response::HTTP_SEE_OTHER);
         }

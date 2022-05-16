@@ -10,6 +10,15 @@
 }
 
 
+
+/* EDITS - DEBUT */
+
+#zone{
+    max-width: 200px;
+}
+
+/* EDITS - FIN */
+
 /* LOGIN & REGISTER FORMS         DEBUT  */
 
 .form-check{
@@ -211,8 +220,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    height: 350px;
-    padding: 16px;
+    height: 355px;
+    padding: 15px;
     transition: 0.2s;
     animation: ease-in-out;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -220,7 +229,7 @@
     cursor: pointer;
 }
 .product-card-container:hover{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(122, 88, 88, 0.35) 0px 5px 15px;
 }
 .link-deco:link{
     text-decoration: none;
@@ -228,11 +237,13 @@
 .top-card{
     display: flex;
     flex-direction: column;
-    height: 70px;
-    margin-bottom: 5px;
+    height: max-content;
+    max-height: 50px;
+    margin-bottom: 10px;
+    align-items: center;
 }
 .catalogue-product-title{
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 600;
     color: #000;
     text-align: center;
@@ -245,8 +256,9 @@
 .card-bottom{
     width: 95%;
 }
-.img150{
+.imgcatalogue{
     height: 150px;
+    padding-top: 15px;
 }
 .price{
     color: #180e00;
@@ -257,6 +269,7 @@
     justify-content: center;
     font-size: 0.8em;
 }
+
 
 .btn-sendtocart{
     background-color: rgba(255, 213, 0, 0.37);
@@ -274,7 +287,7 @@
     animation: ease-in-out;
 }
 .voir-eye:hover{
- opacity: 1;   
+opacity: 1;   
 }
 
 .btn-sendtocart:hover{
@@ -412,7 +425,6 @@
 
 
 /*   FOOTER  -  DEBUT   */
-
 footer{
     font-size: small;
     margin-top: 70px;
@@ -485,6 +497,15 @@ iframe{
 /*   FOOTER  -  FIN   */
 
 
+/*   PANIER -  DEBUT  */
+
+.cart{
+    min-height: 200px;
+}
+
+/*   PANIER -  FIN */
+
+
 
 
 /* MEDIA QUERIES */
@@ -542,7 +563,7 @@ iframe{
         width: 270px;
     }
     .nav-cart-logo{
-        right: 110px;
+        right: 100px;
         top: 58px;
         transition: 0s;
     }

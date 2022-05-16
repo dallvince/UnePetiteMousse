@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Brewries{% endblock %}
+{% block title %}Ajouter une brasserie | {{ parent() }} {% endblock %}
+
+{% block h1 %}Ajouter une brasserie{% endblock %}
 
 {% block body %}
-    <h1>Add new Brewries</h1>
+ 
+    <a class="btn btn-secondary ms-3" href="{{ path('app_admin_brewries_index') }}">Retour</a>
 
-    {# {{ include('admin_brewries/_form.html.twig') }} #}
+    <div class="col-md-8 m-auto">
 
     {{form_start(form)}}
         {{form_row(form.name)}}
         {{form_row(form.description)}}
         {{form_row(form.countries)}}
-        <button class="btn btn-success">{{ button_label|default('Add Brewery') }}</button>
+        <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
     {{form_end(form)}}
+    </div>
 
-    <a href="{{ path('app_admin_brewries_index') }}">back to list</a>
 {% endblock %}

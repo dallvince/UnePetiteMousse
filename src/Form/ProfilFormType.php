@@ -32,18 +32,22 @@ class ProfilFormType extends AbstractType
             // ])
 
             ->add('zip', TextType::class, [
+                "label" => "Code Postal" ,
                 "required" => false,
             ])
 
             ->add('country', TextType::class, [
+                "label" => "Pays" ,
                 "required" => false,
             ])
 
             ->add('adress', TextType::class, [
+                "label" => "Adresse",
                 "required" => false,
             ])
 
             ->add('info', TextareaType::class, [
+                "label" => "Informations",
                 "required" => false,
                 
             ]);
@@ -57,7 +61,8 @@ class ProfilFormType extends AbstractType
                     "mapped" => false,
                     "attr" => [
                         "onchange" => "loadFile(event)"
-                    ]
+                    ],
+                    'invalid_message' => 'L\avatar n\'a pas le bon format ou la bonne taille',
                 ]);
             }
             elseif($options['edit'])
@@ -67,9 +72,11 @@ class ProfilFormType extends AbstractType
                     "mapped" => false,
                     "attr" => [
                         "onchange" => "loadFile(event)"
-                    ]
+                    ],
+                    'invalid_message' => 'L\avatar n\'a pas le bon format ou la bonne taille',
                 ]);
             }
+            
 
             
         ;

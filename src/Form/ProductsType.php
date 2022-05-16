@@ -85,11 +85,11 @@ class ProductsType extends AbstractType
             ->add('countries', EntityType::class, [
                 "class" => Countries::class,
                 "mapped" => false,
+                "placeholder" => "Choisir un pays",
                 "choice_label" => function ($countries) 
                 {
                     return $countries->getFlag() . " " . $countries->getName();
-                },
-                "required" => false
+                }
             ])
 
             ->add('glutenfree', ChoiceType::class, [
