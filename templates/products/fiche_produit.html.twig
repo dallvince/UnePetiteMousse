@@ -7,7 +7,7 @@
 {% block body %}
 
      {# Flash d'ajout au PANIER #}
-    {% for notification in app.flashes('panier') %}
+    {% for notification in app.flashes('basket') %}
 
     <div class="col-md-6 mx-auto alert alert-success text-center">
     {{ notification }}
@@ -17,10 +17,10 @@
 
     <a class="btn btn-dark mt-3 ms-5" href="{{ path('catalogue') }}">Catalogue</a>
 
-    <div class="shadow col-md-8 mx-auto text-center m-4 py-5">
+    <div class="col-md-8 mx-auto text-center m-4 py-5" id="fiche_produit_container">
 
     {% if product.stocks.quantity > 0 %}
-        <form action="{{ path("add_basket")}}" method="post">
+        <form action="{{ path("basket_add")}}" method="post">
 
             <select name="quantity" class="form-control">
 
@@ -42,16 +42,18 @@
             <input type="submit" value="Ajouter au panier" class="btn btn-success">
 
         </form>
-    {% else %}
-        RUPTURE
-    {% endif %}
-    
-        {% if product.picture %}
-            <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
-        {% else %}
-            <img src="{{ asset('img/beer-default.jpg') }}" alt="Bière introuvable" class="img300">
-        {% endif %}
+        
 
+            {% else %}
+                <h1 class="rupture">RUPTURE</h1>
+            {% endif %}
+        
+            {% if product.picture %}
+                <img src="{{ asset('img/upload/' ~ product.picture) }}" alt="" class="img300">
+            {% else %}
+                <img src="{{ asset('img/beer-default.jpg') }}" alt="Bière introuvable" class="img300">
+            {% endif %}
+  
     <div class="col-md-7 mt-3 m-auto">
 
         <h1 class="mb-5">{{ product.name }}</h1>
@@ -107,8 +109,7 @@
                 <a class="btn btn-warning  mt-3" href="{{ path('app_admin_products_edit', {'id': product.id}) }}">Modifier</a>
             {% endif %}
         {% else %}
-            <input class="btn-s btn-sendtocart" type="submit" value="Ajouter au panier" >
-            {# <a href="#">Ajouter au panier</a> #}
+            <input class="btn-s btn-sendtocart mt-3" type="submit" value="Ajouter au panier" >
         {% endif %}
 
     </div>

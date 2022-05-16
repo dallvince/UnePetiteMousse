@@ -2,14 +2,44 @@
 
 {% block title %}Accueil | {{ parent() }} {% endblock %}
 
-{# {% block h1 %}Accueil{% endblock %} #}
+{% block h1 %}{% endblock %}
+
+{% block stylesheets %} 
+<style> 
+
+.title-page{
+    display: none;
+}  
+
+body{
+    background-image: url('{{ asset('img/bg-img.jpg') }}');
+    background-position: 100% 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+    transition: 1s;
+    animation: ease-in-out;
+}
+
+@media only screen and (max-width: 1218px) {
+    body{
+
+        background-image: none;
+    }
+   
+}
+</style>
+{% endblock %}
+
+
+
+
 
 {% block body %}
 
-
     {# CAROUSEL #}
 
-        <h4 class="text-warning text-center mb-4">Quelques unes de nos petites mousses 🍺</h4>
+        <h4 class="text-warning text-center mb-4 mt-5 pt-2">Quelques unes de nos petites mousses 🍺</h4>
 
         <div class="carousel-complete">
             <div id="carouselExampleIndicators" class="carousel carousel-container align-items-center slide" data-bs-ride="carousel">
@@ -24,7 +54,7 @@
                 {% for k, product in RandomProducts %} 
                 <div class="carousel-item {% if k == 0 %} active {% endif %}">
                         <a href="{{  path("fiche_produit", {'id': product.id} )  }}"><img class="d-block m-auto image-card" src="{{ asset('img/upload/' ~ product.picture ) }}" alt="Image de Bière"></a> 
-                        <a class="product-name-link" href="{{  path("fiche_produit", {'id': product.id} )  }}"><p class="product-name">{{ product.name|capitalize }}</p></a>
+                        <a class="product-name-link" href="{{  path("fiche_produit", {'id': product.id} )  }}"><p class="product-name"> {{ product.brewries.countries.flag }} {{ product.name|capitalize }}</p></a>
                 </div>
                 {% endfor %}
             </div>
@@ -39,36 +69,46 @@
             </div>
         </div>
 
-    {# MODALE COOKIES #}
+
+    {# MODALE AGE LEGAL #}
+    {% if not app.request.cookies.get('age_legal') %}
+    <div id="age_container">
+        <div class="col-md-4" id="legal_age">
+            <p>Vous devez être majeur pour pouvoir accéder au site.</p>
+            <div class="btn-age-container col-10" >
+                <div class="text-center age-btn">
+                    <label class="mb-2">Je suis majeur</label>
+                    {{ form_start(formage)}}
+                        {{ form_row(formage.majeur, { 'label': 'Accepter' })}}
+                    {{ form_end(formage)}}     
+                     {# <button class="btn btn-success mt-2" id="majeur">Entrer</button> #}
+                </div>
+                <div class="text-center age-btn">
+                    <label class="mb-2">Je suis mineur</label>
+                    <button class="btn btn-danger" id="mineur">Partir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+     {# MODALE COOKIES #}
+     {% if not app.request.cookies.get('data') %}
     <div id="cookies_container">
         <div class="col-md-12" id="cookies">
             <div id="cookies_text">
                 <p>Ce site utilise des cookies.<p class="cookies_text_query_1"> Notamment pour sauvegarder votre panier d'achat et également pour une meilleure expérience de navigation.</p> Veuillez les accepter.</p>
             </div>
             <div class="cookies_btn">
-                <button class="btn btn-primary btn_size" id="accept">Accepter</button>
-                <button class="btn btn-dark btn_size" id="manage">Préférences</button>
+                {{ form_start(formData)}}
+                        {{ form_row(formData.data, { 'label': 'Accepter' })}}
+                {{ form_end(formData)}}  
+                <button class="btn btn-dark ms-3 mb-3" id="manage">Préférences</button>
             </div>
         </div>
     </div>
-
-    {# MODALE AGE LEGAL #}
-    <div id="age_container">
-        <div class="col-md-4" id="legal_age">
-            <p>Vous devez être majeur pour pouvoir accéder au site.</p>
-            <div class="btn-age-container col-10" >
-                <div class="text-center age-btn">
-                    <label for="">Je suis majeur</label>
-                    <button class="btn btn-success mt-2" id="majeur">Entrer</button>
-                </div>
-                <div class="text-center age-btn">
-                    <label for="">Je suis mineur</label>
-                    <button class="btn btn-danger mt-2" id="mineur">Partir</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    {% endif %}
 {% endblock %}
 
 
@@ -79,6 +119,7 @@
     {# COOKIES MESSAGE #}
         document.getElementById('accept').addEventListener('click', function(){
             document.getElementById('cookies_container').style.display = "none";
+
         });
 
     // LEGAL AGE MESSAGE

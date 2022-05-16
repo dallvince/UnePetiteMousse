@@ -16,10 +16,9 @@
             {{ form_row(formProfil.country)}}
             {{ form_row(formProfil.zip)}}
             {{ form_row(formProfil.info)}}
-            {{ form_row(formProfil.plainPassword)}}
             {{ form_row(formProfil.avatarUpdate)}}
                 
-            
+            <button class="btn btn-danger col-md-2 mt-3"><a href="{{ path('password_edit', {'id': users.id})}}">Modifier Mot de passe</a></button>
         
             <div class="d-flex justify-content-center">
                 <input type="submit" value="Modifier" class="btn btn-warning col-md-2 mt-3">
@@ -43,25 +42,6 @@
 
     </div>
 
-
-{% endblock %}
-
-
-{% block javascripts %}
-
-<script>
-    function loadFile(event){
-
-        let zone = document.getElementById("zone");
-        zone.innerHTML="";
-        
-        let image = document.createElement('img');
-        image.setAttribute("src", URL.createObjectURL(event.target.files[0]));
-        image.setAttribute("class", "image_ajout_preview");
-
-        zone.append(image);
-    }
-</script>
 
 {% endblock %}
 

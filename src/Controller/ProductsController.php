@@ -30,6 +30,7 @@ class ProductsController extends AbstractController
      */
     public function catalogue(ProductsRepository $repoProduct, Request $request) : Response
     {
+       
         $filter = new ProductsFilters;
         $form = $this->createForm(FiltersType::class, $filter);
 
