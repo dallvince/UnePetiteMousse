@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FooterController extends AbstractController
 {
+
     /**
      * @Route("/informations", name="app_infos")
      */

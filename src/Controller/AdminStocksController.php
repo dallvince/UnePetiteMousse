@@ -60,4 +60,16 @@ class AdminStocksController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/delete", name="app_admin_stocks_delete", methods={"GET", "POST"})
+     */
+    public function delete(Request $request, Products $product, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($product);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_admin_products_index', [], Response::HTTP_SEE_OTHER);
+    }
 }

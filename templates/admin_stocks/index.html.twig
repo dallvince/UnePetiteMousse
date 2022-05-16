@@ -24,7 +24,7 @@
         {{ form_end(formFilter) }}
     </div>
 
-    <div class="d-flex table-responsive">
+    <div class="d-flex table-responsive flex-column">
         <table class="table table-striped table-hover text-center mt-3 mx-5 m-auto">
             <thead class="bg-dark text-white">
             <thead>
@@ -32,7 +32,8 @@
                     <th>Nom produit</th>
                     <th>Quantité</th>
                     <th>Dernier ajout</th>
-                    <th>Ajout</th>
+                    <th>Quantité</th>
+                    <th></th>
                     <th>Corriger</th>
                 </tr>
             </thead>
@@ -42,9 +43,10 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.stocks.quantity }}</td>
                     <td>{{ product.stocks.UpdatedAt ? product.stocks.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td><input type="integer"></td>
+                    <td><input class="newQuantity2" type="integer"></td>
+                    <td><input class="newQuantity" type="hidden" value="{{product.id}}"></td>
                     <td>
-                        <a href="{{ path('app_admin_stocks_edit', {'id': product.stocks.id}) }}"><i class="fa-solid fa-file-excel"></i></a>
+                        <a href="{{ path('app_admin_stocks_edit', {'id': product.stocks.id}) }}"><i class="fa-solid fa-file-excel text-danger"></i></a>
                     </td>
                 </tr>
             {% else %}
@@ -54,6 +56,22 @@
             {% endfor %}
             </tbody>
         </table>
+        <input type="submit" class="stockBtn btn btn-success col-md-3 mt-3" value="Ajouter">
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let newQuantity = $('.newQuantity');
+        let stockBtn = $('.stockBtn');
+        console.log(newQuantity);
+
+        stockBtn.click(function(){
+            // console.log('tape!')
+            let data = newQuantity.val();
+            console.log(data);
+        });
+
+    </script>
 {% endblock %}

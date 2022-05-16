@@ -15,7 +15,7 @@ class PasswordEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
+        $builder      
         ->add('plainPassword', RepeatedType::class, [
             'type' => PasswordType::class,
             'first_options' => [
@@ -49,6 +49,7 @@ class PasswordEditType extends AbstractType
             'mapped' => false,
             'required' => false 
         ]);
+
         ;
     }
 
