@@ -53,8 +53,8 @@ class ProfilFormType extends AbstractType
                 'first_options' => [
                     'attr' => [
                     'autocomplete' => 'new-password',
-                    "placeholder" => "Nouveau mot de passe"
-                ],
+                    "placeholder" => "Nouveau mot de passe",
+                                    ],
                     'constraints' => [
                         new NotBlank([
                             'message' => 'Veuillez saisir un nouveau mot de passe',
@@ -79,6 +79,7 @@ class ProfilFormType extends AbstractType
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'required' => false 
             ]);
             
             if($options['ajouter'])

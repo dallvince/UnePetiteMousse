@@ -84,6 +84,12 @@ class Products
      */
     private $status = 0;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Stocks::class, cascade={"persist", "remove"})
+     */
+    private $stocks;
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -264,6 +270,18 @@ class Products
     public function setStatus(?bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStocks(): ?Stocks
+    {
+        return $this->stocks;
+    }
+
+    public function setStocks(?Stocks $stocks): self
+    {
+        $this->stocks = $stocks;
 
         return $this;
     }
