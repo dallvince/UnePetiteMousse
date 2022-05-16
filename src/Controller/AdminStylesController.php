@@ -43,6 +43,8 @@ class AdminStylesController extends AbstractController
             $entityManager->persist($style);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le Style a bien été ajouté !');
+
             return $this->redirectToRoute('app_admin_styles_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -72,6 +74,8 @@ class AdminStylesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
+            $this->addFlash('success', 'Le Style a bien été modifié !');
 
             return $this->redirectToRoute('app_admin_styles_index', [], Response::HTTP_SEE_OTHER);
         }
