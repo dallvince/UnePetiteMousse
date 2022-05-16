@@ -6,6 +6,7 @@ use App\Repository\ProductsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductsRepository::class)
@@ -21,11 +22,20 @@ class Products
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Saisir un nom pour votre produit")
+     *  @Assert\Length(
+     *  min = 5,
+     *  max = 50,
+     *  minMessage = "Veuillez saisir au moins 5 caractères",
+     *  maxMessage = "Veuillez saisir au maximum 100 caractères" 
+     *  )
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Ajouter un prix")
+     * @Assert\Positive(message="Veuillez saisir un prix au dessus de zéro")
      */
     private $price;
 
@@ -36,6 +46,17 @@ class Products
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Ajouter une description")
+     *   @Assert\Image(
+     *     minWidth = 100,
+     *     maxWidth = 400,
+     *     minHeight = 100,
+     *     maxHeight = 400,
+     *     minHeightMessage = "Le fichier doit faire minimum 20 pixels de haut.",
+     *     maxHeightMessage = "Le fichier doit faire maximum 400 pixels de large.",
+     *     minWidthMessage = "Le fichier doit faire minimum 20 pixels de haut.",
+     *     maxWidthMessage = "Le fichier doit faire maximum 400 pixels de large."  
+     * )
      */
     private $picture;
 
@@ -46,21 +67,39 @@ class Products
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\NotBlank(message="Ajouter le degré d'alcool")
+     * @Assert\Positive(message="Veuillez saisir un degré au dessus de zéro")
+
+     * 
      */
     private $abv;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Ajouter le degré d'amertume")
+     * @Assert\Positive(message="Veuillez saisir un degré au dessus de zéro")
      */
     private $ebc;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Assert\Length(
+     *  min = 1,
+     *  max = 8,
+     *  minMessage = "Veuillez saisir au moins 1 caractère",
+     *  maxMessage = "Veuillez saisir au maximum 8 caractères" 
+     *  )
      */
     private $glutenfree;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Assert\Length(
+     *  min = 1,
+     *  max = 8,
+     *  minMessage = "Veuillez saisir au moins 1 caractère",
+     *  maxMessage = "Veuillez saisir au maximum 8 caractères" 
+     *  )
      */
     private $organic;
 

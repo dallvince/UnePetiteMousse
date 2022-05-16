@@ -60,9 +60,7 @@ class CartController extends AbstractController
 
         $session->set('cart', $cart);
         
-        return $this->redirectToRoute('app_cart', [
-
-        ]);
+        return $this->redirectToRoute('app_cart', [ ]);
     }
 
     /**

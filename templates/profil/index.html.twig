@@ -6,6 +6,14 @@
 
 {% block body %}
 
+    {% for notification in app.flashes('success') %}
+
+    <div class="col-md-6 mx-auto alert alert-success text-center">
+    {{ notification }}
+    </div>
+
+    {% endfor %}
+
     <div class="d-flex table-responsive">
     <table class="table table-striped table-hover text-center mt-3 mx-5 m-auto">
         <thead class="bg-dark text-white">
@@ -29,7 +37,7 @@
 
                 <td>
                     {% if users.avatar %}
-                        <img src="{{ asset('img/upload/' ~ users.avatar) }}" alt="" class="img80">
+                        <img src="{{ asset('img/avatarUpload/' ~ users.avatar) }}" alt="" class="img80">
                     {% else %}
                         <img src="{{ asset('img/imageDefault.png') }}" alt="" class="img80">
                     {% endif %}

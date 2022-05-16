@@ -6,8 +6,17 @@
 
 {% block body %}
 
-<div class="col-md-10 mx-auto">
+{% for notification in app.flashes('success') %}
 
+<div class="col-md-6 mx-auto alert alert-success text-center">
+{{ notification }}
+</div>
+
+{% endfor %}
+
+<a class="btn btn-success text-center ms-5 mb-3" href="{{ path('app_admin_brewries_new') }}"> Ajouter une Brasserie</a>
+
+<div class="col-md-10 mx-auto">
 
     <table class="table">
         <thead>
@@ -52,12 +61,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">Aucune brasserie enregistrée</td>
+                <td colspan="4">Aucune brasserie n'est enregistrée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_brewries_new') }}">Create new</a>
 </div>
 {% endblock %}

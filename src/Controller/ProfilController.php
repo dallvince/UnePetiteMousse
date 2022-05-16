@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Entity\Products;
 use App\Form\ProfilFormType;
 use App\Form\ChangePasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,7 +40,9 @@ class ProfilController extends AbstractController
     /**
      * @Route("/{id}/edit_profil", name="app_profil_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Users $users, EntityManagerInterface $entityManager): Response
+  
+public function edit(Request $request, Users $users, Products $product, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
+      
     {
         $form = $this->createForm(ProfilFormType::class, $users, ["edit" => true]);
         $form->handleRequest($request);
@@ -78,6 +81,7 @@ class ProfilController extends AbstractController
             return $this->renderForm('profil/edit.html.twig', [
             'users' => $users,
             'formProfil' => $form,
+            
         ]);
     }
 

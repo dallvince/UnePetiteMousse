@@ -5,9 +5,18 @@
 {% block h1 %}Gestion des styles{% endblock %}
 
 {% block body %}
-<div class="col-md-10 mx-auto">
-    <h1>Styles index</h1>
 
+{% for notification in app.flashes('success') %}
+
+<div class="col-md-6 mx-auto alert alert-success text-center">
+{{ notification }}
+</div>
+
+{% endfor %}
+
+<a class="btn btn-success text-center ms-5 mb-3" href="{{ path('app_admin_styles_new') }}">Ajouter un style</a>
+
+<div class="col-md-10 mx-auto">
     <table class="table">
         <thead>
             <tr>
@@ -55,6 +64,6 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success" href="{{ path('app_admin_styles_new') }}">Ajouter un style</a>
+
 </div>
 {% endblock %}
