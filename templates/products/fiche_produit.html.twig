@@ -7,7 +7,7 @@
 {% block body %}
 
      {# Flash d'ajout au PANIER #}
-    {% for notification in app.flashes('panier') %}
+    {% for notification in app.flashes('basket') %}
 
     <div class="col-md-6 mx-auto alert alert-success text-center">
     {{ notification }}
@@ -20,7 +20,7 @@
     <div class="shadow col-md-8 mx-auto text-center m-4 py-5">
 
     {% if product.stocks.quantity > 0 %}
-        <form action="{{ path("add_basket")}}" method="post">
+        <form action="{{ path("basket_add")}}" method="post">
 
             <select name="quantity" class="form-control">
 
