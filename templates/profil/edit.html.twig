@@ -63,22 +63,3 @@
 </script>
 
 {% endblock %}
-
-
-{% block javascripts %}
-
-<script>
-    function loadFile(event){
-
-        let zone = document.getElementById("zone");
-        zone.innerHTML="";
-        
-        let image = document.createElement('img');
-        image.setAttribute("src", URL.createObjectURL(event.target.files[0]));
-        image.setAttribute("class", "image_ajout_preview");
-
-        zone.append(image);
-    }
-</script>
-
-{% endblock %}
