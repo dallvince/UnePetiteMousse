@@ -23,7 +23,8 @@ class HomeController extends AbstractController
         ]);
     }
 
-
+    
+    
     /**
     * @Route("/", name="app_home")
     */

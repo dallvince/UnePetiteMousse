@@ -15,9 +15,13 @@
     <h1 class="main-title title-page text-center text-primary my-3">{% block h1 %}{% endblock %}</h1>
     
     {% block body %}
-    "AF"
+    
+    
+    
     {% endblock %}
-        
+
+    {% include "footer/footer.html.twig" %}
+    
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
@@ -27,8 +31,7 @@
         <script>
             feather.replace()
         </script>
-
-        {% block javascripts %}{% endblock %}
+            {% block javascripts %}{% endblock %}
     </body>
 </html>
 
