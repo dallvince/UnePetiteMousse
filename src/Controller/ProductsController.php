@@ -52,8 +52,7 @@ class ProductsController extends AbstractController
     /**
      * 
      * @Route("/fiche_produit/{id}", name="fiche_produit")
-     */
-    
+     */    
     public function fiche_produit($id, Products $products, Request $request, EntityManagerInterface $manager, CommentsRepository $repoComments, ProductsRepository $repoProducts) 
     {
         $products = $repoProducts->find($id);
@@ -97,4 +96,5 @@ class ProductsController extends AbstractController
             "commentsForm" => $formComments->createView()
         ]);
     }
+
 }
