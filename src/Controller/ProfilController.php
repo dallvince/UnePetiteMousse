@@ -87,6 +87,8 @@ class ProfilController extends AbstractController
 
             if($avatarFile){
 
+                
+
                 $avatarName = date('YmdHis') . "-" . uniqid() . "." . $avatarFile->getClientOriginalExtension();
                 $avatarFile->move($this->getParameter('avatarUpload'),  $avatarName);
 
@@ -94,9 +96,8 @@ class ProfilController extends AbstractController
                     unlink($this->getParameter('avatarUpload') . "/" . $users->getAvatar());
                     
                 }
-                else{
-                    $users->setAvatar($avatarName);
-                }
+                
+                $users->setAvatar($avatarName);
                 
             }
             
