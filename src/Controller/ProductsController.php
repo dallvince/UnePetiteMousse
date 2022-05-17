@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Products;
 use App\Form\FiltersType;
+use App\Form\CommentsType;
 use App\filters\ProductsFilters;
+use App\Repository\CommentsRepository;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,9 +54,28 @@ class ProductsController extends AbstractController
      * @Route("/fiche_produit/{id}", name="fiche_produit")
      */
     
-    public function fiche_produit(Products $products, Request $request, EntityManagerInterface $manager) 
+    public function fiche_produit($id, Products $products, Request $request, EntityManagerInterface $manager, CommentsRepository $repoComments, ProductsRepository $repoProducts) 
     {
+        $products = $repoProducts->find($id);
 
+        $messages = $repoComments->findBy(["products" => $products], array('id' => 'DESC'));
+
+        $comments = new Comments;
+        $formComments = $this->createForm(CommentsType::class, $comments);
+        
+        $formComments->handleRequest($request);
+
+        if($formComments->isSubmitted() and $formComments->isValid())
+        {
+            $userCo = $this->getUser();
+
+            $comments->setCreatedAt(new \DateTimeImmutable('now'));
+            $comments->setProducts($products);
+            $comments->setUsers($userCo); 
+
+            $manager->persist($comments);
+            $manager->flush();
+        }
 
         $form = $this->createForm(FormType::class);
 
@@ -71,6 +93,8 @@ class ProductsController extends AbstractController
 
         return $this->render("products/fiche_produit.html.twig", [
             "product" => $products,
+            "messages" => $messages,
+            "commentsForm" => $formComments->createView()
         ]);
     }
 }
