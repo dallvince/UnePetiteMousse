@@ -50,7 +50,6 @@ class ProductsController extends AbstractController
      * 
      * @Route("/fiche_produit/{id}", name="fiche_produit")
      */
-    
     public function fiche_produit(Products $products, Request $request, EntityManagerInterface $manager) 
     {
 
@@ -73,4 +72,5 @@ class ProductsController extends AbstractController
             "product" => $products,
         ]);
     }
+
 }

@@ -260,7 +260,7 @@
     border-radius: 8px;
     padding: 6px;
     margin-top: 5px;
-    width: 140px;
+    width: 155px;
     height: 40px;
     transition: 0.3s;
     animation: ease-in-out;
@@ -297,8 +297,8 @@ opacity: 1;
     position: absolute;
     right: 0;
     left: 0;
-    top: 300px;
-    -webkit-text-stroke: 2px rgb(0, 0, 0);
+    top: 20%;
+    z-index: 5;
 }
 /*   FICHE PRODUIT - FIN    */
 

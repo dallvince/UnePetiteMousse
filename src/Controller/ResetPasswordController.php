@@ -137,6 +137,40 @@ class ResetPasswordController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * Validates and process the reset URL that the user clicked in their email.
+     *
+     * @Route("/modify_password/{id}", name="app_reset_password")
+     */
+    public function modify_password(Users $users, Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
+    {
+        
+        // The token is valid; allow the user to change their password.
+        $form = $this->createForm(ChangePasswordFormType::class);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // A password reset token should be used only once, remove it.
+
+            // Encode(hash) the plain password, and set it.
+            $encodedPassword = $userPasswordHasher->hashPassword(
+                $users,
+                $form->get('plainPassword')->getData()
+            );
+
+            $users->setPassword($encodedPassword);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('reset_password/reset.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
+    }
+
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
     {
         $user = $this->entityManager->getRepository(Users::class)->findOneBy([
