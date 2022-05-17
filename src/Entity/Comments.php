@@ -2,8 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentsRepository;
+use App\Entity\Users;
+use App\Entity\Products;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\CommentsRepository;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @ORM\Entity(repositoryClass=CommentsRepository::class)
@@ -19,6 +24,14 @@ class Comments
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Veuillez renseigner un minimum d'informations s.v.p")
+     * @Assert\Length
+     * (
+     * min = 3,
+     * max = 200,
+     * minMessage = "Veuillez saisir au moins 3 caractères",
+     * maxMessage = "200 caractères maximum autorisés"
+     * )
      */
     private $message;
 
@@ -36,6 +49,11 @@ class Comments
      * @ORM\ManyToOne(targetEntity=Products::class, inversedBy="comments")
      */
     private $products;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $rating;
 
     public function getId(): ?int
     {
@@ -86,6 +104,18 @@ class Comments
     public function setProducts(?Products $products): self
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function getRating(): ?float
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?float $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }
