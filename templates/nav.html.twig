@@ -54,12 +54,12 @@
   <div id="connexion_btn_zone">
     {% if not app.user  %}
       <div class="register_button">
-        <a class="nav-link active me-3" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
+        <a class="btn btn-light text-success me-4 shadow" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
       </div>
     {% endif %}
     {% if not app.user  %}
       <div class="logout_login_buttons active">
-        <a class="btn btn-success text-light" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
+        <a class="btn btn-success text-light shadow" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
       </div>
     {% endif %}
     {% if app.user  %}

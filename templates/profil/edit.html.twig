@@ -5,28 +5,22 @@
 {% block body %}
 
 
-
     <a class="btn btn-secondary ms-3" href="{{ path('app_profil') }}">Retour</a>
 
     <div class="col-md-8 m-auto">
 
-        <button class="btn btn-danger col-md-2 my-3" href="{{ path('app_reset_password', {'id': users.id})}}">Modifier Mot de passe</button>
-        
+        <button class="btn btn-danger col-md-2 my-3"><a class="text-decoration-none text-light" href="{{ path('app_modify_password', {'id': users.id}) }}">Modifier Mot de passe</a></button>
 
         {{ form_start(formProfil)}}
-            {# {{ form_row(formProfil.pseudo)}} #}
-            {# {{ form_row(formProfil.email)}} #}
             {{ form_row(formProfil.adress)}}
-            {{ form_row(formProfil.country)}}
             {{ form_row(formProfil.zip)}}
+            {{ form_row(formProfil.countries)}}
             {{ form_row(formProfil.info)}}
             {{ form_row(formProfil.avatarUpdate)}}
-                
-            <div class="d-flex justify-content-center">
-                <input type="submit" value="Modifier" class="btn btn-warning col-md-2 mt-3">
-            </div>
-
-            <div id="zone" class="d-flex mt-2 m-auto text-center justify-content-center col-md-2">
+            {{ form_row(formProfil.modifier)}}
+        {{ form_end(formProfil)}}
+         
+            <div id="zone" class="d-flex mt-2 m-auto text-center justify-content-center ">
                 {% if users.avatar %}
                     <img class="img-fluid img-thumbnail" src="{{ asset('img/avatarUpload/' ~ users.avatar)}}" alt="">
                     <td><a href="{{ path("picture_delete", {'id': users.id} ) }}"><i class="delete-icon" data-feather="trash" title="supprimer"></i></a></td>
@@ -34,7 +28,7 @@
                 {% endif %}
     </div>
             </div>
-        {{ form_end(formProfil)}}
+        
 
 
 
