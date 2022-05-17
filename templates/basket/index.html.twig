@@ -42,12 +42,13 @@
 
                         <td>
                         {% if basket.quantity[i] > 0 %}
-                            
-                            <span class="quantityChange" id="moins{{ basket.id[i] }}" data-value="{{ basket.id[i] }}" data-what="moins">-</span>
+                            <div class="btnQuantity">
+                                <span class="quantityChange btnmoins" id="moins{{ basket.id[i] }}" data-value="{{ basket.id[i] }}" data-what="moins">-</span>
 
-                            <span id="newQuantity{{ basket.id[i] }}">{{ basket.quantity[i] }}</span>
+                                <span class="btnQ" id="newQuantity{{ basket.id[i] }}">{{ basket.quantity[i] }}</span>
 
-                            <span class="quantityChange" id="plus{{ basket.id[i] }}" data-value="{{ basket.id[i] }}" data-what="plus">+</span>
+                                <span class="quantityChange btnmoins" id="plus{{ basket.id[i] }}" data-value="{{ basket.id[i] }}" data-what="plus">+</span>
+                            </div>
                         {% else %}
                             <h2 class="text-warning">LE PRODUIT EST INDISPONIBLE</h2>
                         {% endif %}
