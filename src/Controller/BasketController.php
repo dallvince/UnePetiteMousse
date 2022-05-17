@@ -23,8 +23,18 @@ class BasketController extends AbstractController
     public function index(SessionInterface $session, Basket $basket): Response
     {
         // dd($session->get("basket"));
+        $basket->verification();
         $basketSession = $session->get("basket");
-        $montant = $basket->montant();
+
+
+        if($session->get("basket"))
+        {
+            $montant = $basket->montant();
+        }
+        else
+        {
+            $montant = 0;
+        }
 
         return $this->render('basket/index.html.twig', [
             'basket' => $basketSession,
@@ -77,27 +87,46 @@ class BasketController extends AbstractController
 
         $newQuantity = $basket->change($id, $what);
 
-        if($newQuantity != "delete")
-        {
-            $product = $repoProduct->find($id);
-    
-            $price = $product->getPrice();
-    
-            $montant = round($newQuantity * $price, 2);
-    
-            $array = [
-                'value' => $newQuantity, 
-                'montant' => $montant, 
-                'montantTtotal' => $basket->montant()
-            ];
+        $product = $repoProduct->find($id);
 
-        }
-        else
-        {
-            $array = false;
-        }
+        $price = $product->getPrice();
+
+        $montant = round($newQuantity * $price, 2);
+
+        $max = ($newQuantity == $product->getStocks()->getQuantity()) ? true : false; // ? tu rentre dans le if et : tu rentre dans le else
+
+        $array = [
+            'value' => $newQuantity, 
+            'montant' => $montant, 
+            'montantTotal' => $basket->montant(),
+            "max" => $max
+        ];
 
 
         return new JsonResponse($array);
+    }
+
+    /**
+     * @Route("/verification", name="verification")
+     */
+    public function verification(Request $request, Basket $basket, ProductsRepository $repoProduct)
+    {
+        // $id = $request->request->get('id');
+        // $what = $request->request->get('what');
+
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/paiement", name="basket_paiement")
+     */
+    public function paiement(Basket $basket)
+    {
+        $user = $this->getUser();
+
+        $basket->paiement($user);
+
+        return $this->redirectToRoute("app_basket");
     }
 }

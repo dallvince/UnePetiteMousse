@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Products;
 use App\Form\FiltersType;
 use App\filters\ProductsFilters;
+use App\Form\CommentsType;
+use App\Repository\CommentsRepository;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,4 +76,5 @@ class ProductsController extends AbstractController
             "product" => $products,
         ]);
     }
+
 }
