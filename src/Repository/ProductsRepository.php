@@ -50,10 +50,11 @@ class ProductsRepository extends ServiceEntityRepository
     }
 
 
-    public function findRand($maxResults){
-
+    public function findRand($maxResults, $status){
         return $this->createQueryBuilder('p')
         ->orderBy('RAND()')
+        ->andWhere("p.status IN (:stat)")
+        ->setParameter("stat", $status)
         ->setMaxResults($maxResults)
         ->getQuery()
         ->getResult()

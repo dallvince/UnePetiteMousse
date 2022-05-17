@@ -69,11 +69,7 @@ class HomeController extends AbstractController
         }
 
 
-
-
-        
-
-        $products = $repoProducts->findRand(5);
+        $products = $repoProducts->findRand(5, 1);
         
         return $this->render('home/index.html.twig', [
             'RandomProducts'     => $products,
