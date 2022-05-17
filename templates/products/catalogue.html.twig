@@ -53,8 +53,8 @@
                         <i class="text-warning" data-feather="eye"></i>
                     </a>  
                 </div>
-                <a href="{{ path('basket_add', {'id': product.id}) }}">
                 
+                {% if product.stocks.quantity %}
                 <form action="{{ path("basket_add")}}" method="post">
 
                     <input type="hidden" name="product" value="{{product.id}}">
@@ -75,6 +75,9 @@
                     </select>
 
                 </form>
+                {% else %}
+                <p>produit indisponible</p>
+                {% endif %}
 
                 <div class=" d-flex card-bottom justify-content-between">
                 <a class="link-deco voir-eye" href="{{  path("fiche_produit", {'id': product.id} )  }}">👁️</a>
