@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Stocks;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,8 +13,10 @@ class StocksType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantity')
-            ->add('UpdatedAt')
+            ->add('quantity', IntegerType::class, [
+                'placeholder' => 'nouvelles quantités',
+                'required' => false
+            ])
         ;
     }
 
