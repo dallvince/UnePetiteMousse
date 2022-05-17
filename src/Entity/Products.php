@@ -128,10 +128,16 @@ class Products
      */
     private $stocks;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DetailsCommande::class, mappedBy="product")
+     */
+    private $detailsCommandes;
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->detailsCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -321,6 +327,36 @@ class Products
     public function setStocks(?Stocks $stocks): self
     {
         $this->stocks = $stocks;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailsCommande>
+     */
+    public function getDetailsCommandes(): Collection
+    {
+        return $this->detailsCommandes;
+    }
+
+    public function addDetailsCommande(DetailsCommande $detailsCommande): self
+    {
+        if (!$this->detailsCommandes->contains($detailsCommande)) {
+            $this->detailsCommandes[] = $detailsCommande;
+            $detailsCommande->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommande(DetailsCommande $detailsCommande): self
+    {
+        if ($this->detailsCommandes->removeElement($detailsCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getProduct() === $this) {
+                $detailsCommande->setProduct(null);
+            }
+        }
 
         return $this;
     }
