@@ -575,7 +575,12 @@ iframe{
     
 }
 
-
+/* INPUT CUSTOM */
+.inputCustom{
+    background-color: transparent;
+    border: none;
+    text-align: center;
+}
 
 /* ANIMATIONS */
 

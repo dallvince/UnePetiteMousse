@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/admin/stocks")
@@ -61,7 +62,7 @@ class AdminStocksController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="app_admin_stocks_delete", methods={"GET", "POST"})
+     * @Route("/{id}/delete", name="app_admin_stocks_delete", methods={"POST"})
      */
     public function delete(Request $request, Products $product, EntityManagerInterface $entityManager): Response
     {
@@ -71,5 +72,23 @@ class AdminStocksController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_products_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/change/stock", name="app_change_stock", methods={"GET", "POST"})
+     */
+    public function change_stock(Request $request, ProductsRepository $repoProducts, EntityManagerInterface $manager) : Response
+    {
+        $id = $request->request->get('id');
+        $quantity = $request->request->get('quantity');
+
+        $products = $repoProducts->find($id);
+
+        $products->getStocks()->setQuantity($quantity);
+
+        $manager->persist($products);
+        $manager->flush();
+
+        return new JsonResponse();
     }
 }

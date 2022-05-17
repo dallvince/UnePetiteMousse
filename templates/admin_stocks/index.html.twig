@@ -30,10 +30,9 @@
             <thead>
                 <tr>
                     <th>Nom produit</th>
-                    <th>Quantité</th>
+                    <th>En stock</th>
                     <th>Dernier ajout</th>
-                    <th>Quantité</th>
-                    <th></th>
+                    <th>Ajouter</th>
                     <th>Corriger</th>
                 </tr>
             </thead>
@@ -43,8 +42,8 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.stocks.quantity }}</td>
                     <td>{{ product.stocks.UpdatedAt ? product.stocks.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td><input class="newQuantity2" type="integer"></td>
-                    <td><input class="newQuantity" type="hidden" value="{{product.id}}"></td>
+                    <td><input class="newQuantity inputCustom" data-id="{{product.id}}" type="integer" style="width: 80px"></td>
+                    {# <td><input class="" type="hidden" value="{{product.id}}"></td> #}
                     <td>
                         <a href="{{ path('app_admin_stocks_edit', {'id': product.stocks.id}) }}"><i class="fa-solid fa-file-excel text-danger"></i></a>
                     </td>
@@ -56,7 +55,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <input type="submit" class="stockBtn mx-auto my-3 btn btn-success col-md-3 mt-3" value="Ajouter">
+            <input type="submit" class="stockBtn mx-auto my-3 btn btn-success col-md-3 mt-3" value="Ajouter">
     </div>
 
 {% endblock %}
@@ -64,14 +63,21 @@
 {% block javascripts %}
     <script>
         let newQuantity = $('.newQuantity');
-        let stockBtn = $('.stockBtn');
-        console.log(newQuantity);
-
-        stockBtn.click(function(){
-            // console.log('tape!')
-            let data = newQuantity.val();
-            console.log(data);
+        newQuantity.change(function(){
+        
+        let data = {
+            "quantity" : $(this).val(),
+            "id" : $(this).data('id') // attr data-id
+        }
         });
+        // console.log(newQuantity);
+
+        $.ajax({
+            method : 'post',
+            dataType : 'json',
+            url : '{{path('app_change_stock')}}',
+            data : data
+        })
 
     </script>
 {% endblock %}
