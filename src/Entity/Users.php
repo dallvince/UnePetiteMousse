@@ -47,16 +47,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *   @Assert\Image(
-     *     minWidth = 20,
-     *     maxWidth = 350,
-     *     minHeight = 20,
-     *     maxHeight = 350,
-     *     minHeightMessage = "Le fichier doit faire minimum 20 pixels de haut.",
-     *     maxHeightMessage = "Le fichier doit faire maximum 400 pixels de large.",
-     *     minWidthMessage = "Le fichier doit faire minimum 20 pixels de haut.",
-     *     maxWidthMessage = "Le fichier doit faire maximum 400 pixels de large."  
-     * )
      */
     private $avatar;
 
