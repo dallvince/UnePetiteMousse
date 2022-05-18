@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block h1 %}Panier{% endblock %}
+
+{% block body %}
+    <a class="btn btn-secondary ms-3" href="{{ path('app_profil') }}">Retour</a>
+
+    <div class="col-md-8 m-auto">
+
+        {{ form_start(formProfil)}}
+        <div class="col-md-4 d-flex justify-content-around">
+        
+            {{ form_row(formProfil.adress)}}
+            {{ form_row(formProfil.zip)}}
+        </div>
+            {{ form_row(formProfil.countries)}}
+        {{ form_end(formProfil)}}
+
+    </div>
+
+
+{% endblock %}

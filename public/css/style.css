@@ -506,6 +506,12 @@ iframe{
     width: 80%;
 }
 
+
+li a{
+    text-decoration: none;
+    color: black;
+}
+
 /*   FOOTER  -  FIN   */
 
 

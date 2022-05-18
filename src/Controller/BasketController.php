@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductsRepository;
+use App\Entity\Users;
 use App\Service\Basket;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Form\ProfilFormType;
+use App\Repository\ProductsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
     /**
      * @Route("/basket")
@@ -23,11 +26,10 @@ class BasketController extends AbstractController
     public function index(SessionInterface $session, Basket $basket): Response
     {
         
-        
         $basketSession = $session->get("basket");
 
         // dump($basketSession);
-       
+
         if($session->get("basket"))
         {
             $basket->verification();
@@ -130,5 +132,36 @@ class BasketController extends AbstractController
         $basket->paiement($user);
 
         return $this->redirectToRoute("app_basket");
+    }
+
+    /**
+     * @Route("/paiement_page", name="paiement_page")
+     */
+    public function paiement_page(Request $request, EntityManagerInterface $entityManager)
+    {
+
+        $user = $this->getUser();
+        $form = $this->createForm(ProfilFormType::class, $user);
+        $form->handleRequest($request);
+
+        
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre profil a bien été modifié !');
+
+            return $this->redirectToRoute('catalogue', [], Response::HTTP_SEE_OTHER);
+        }
+            
+
+        
+        
+        return $this->render('profil/paiement_page.html.twig', [
+            'users' => $user,
+            'formProfil' => $form->createView()
+            
+        ]);
+
     }
 }

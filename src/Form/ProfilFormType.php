@@ -43,11 +43,7 @@ class ProfilFormType extends AbstractType
                 "required" => false,
             ])
 
-            ->add('info', TextareaType::class, [
-                "label" => "Informations",
-                "required" => false,
-                
-            ])
+
             ->add('modifier', SubmitType::class, [
                 "attr" => [
                     "value" => "Modifier profil",
