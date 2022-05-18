@@ -151,10 +151,12 @@ class Basket {
     public function verification() 
     {
 
+       
         $basket = $this->session->get("basket");
 
         $size = count($basket['id']);
 
+        
         for($i = 0; $i < $size; $i++)
         {
             $product = $this->repoProduct->find($basket['id'][$i]);
