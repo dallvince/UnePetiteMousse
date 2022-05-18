@@ -42,6 +42,7 @@ class ProductsController extends AbstractController
 
         $products = $repoProduct->findFilters($filter);
 
+        // dd($products);
 
         return $this->render("products/catalogue.html.twig", [
             "products" => $products,

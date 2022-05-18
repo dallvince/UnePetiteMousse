@@ -92,6 +92,8 @@ class ProductsRepository extends ServiceEntityRepository
         ->leftJoin("p.brewries", "b")
         ->leftJoin("b.countries", "c")
         ->leftJoin("p.styles", "st")
+        ->andWhere("p.status = :sta")
+        ->setParameter("sta", 1)
         ;
 
         if($filter->search)
