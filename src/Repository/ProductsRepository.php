@@ -186,4 +186,103 @@ class ProductsRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
 
     }
+
+    public function findFiltersadmin(ProductsFilters $filter)
+    {
+        $query =  $this->createQueryBuilder("p")
+        ->leftJoin("p.brewries", "b")
+        ->leftJoin("b.countries", "c")
+        ->leftJoin("p.styles", "st")
+        ;
+
+        if($filter->search)
+        {
+            $query = $query
+            ->andWhere('p.name LIKE :search')
+            ->orWhere("b.name LIKE :search")
+            ->orWhere('p.description LIKE :search')
+            ->orWhere('c.name LIKE :search')
+            ->setParameter("search", "%$filter->search%")
+            ;
+        }
+
+        if($filter->minPrice)
+        {
+            $query = $query
+            ->andwhere('p.price >= :min')
+            ->setParameter("min", $filter->minPrice)
+            ;
+        }
+
+        if($filter->maxPrice)
+        {
+            $query = $query
+            ->andwhere('p.price <= :max')
+            ->setParameter("max", $filter->maxPrice)
+            ;
+        }
+
+        if($filter->style)
+        {
+            $query = $query
+            ->andWhere('st.id IN (:st)')
+            ->setParameter("st", $filter->style)
+            ;
+        }
+
+        if($filter->country)
+        {
+            $query = $query
+            ->andWhere('c.id IN (:country)')
+            ->setParameter("country", $filter->country)
+            ;
+        }
+
+        if($filter->brewry)
+        {
+            $query = $query
+            ->andWhere('b.id IN (:br)')
+            ->setParameter("br", $filter->brewry)
+            ;
+        }
+
+        if($filter->order)
+        {
+            switch($filter->order)
+            {
+                case 1:
+                    $query = $query
+                    ->orderBy("p.price", "ASC")
+                    ;
+                    break;
+
+                    case 2:
+                        $query = $query
+                        ->orderBy("p.price", "DESC")
+                        ;
+                        break;
+                    
+                    case 3:
+                        $query = $query
+                        ->orderBy("p.createdAt", "DESC")
+                        ;
+                        break;
+
+                    case 4:
+                        $query = $query
+                        ->orderBy("p.name", "ASC")
+                        ;
+                        break;
+
+                    case 5:
+                        $query = $query
+                        ->orderBy("p.name", "DESC")
+                        ;
+                        break;
+                }
+        }
+
+        return $query->getQuery()->getResult();
+
+    }
 }
