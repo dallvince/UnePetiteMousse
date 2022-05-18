@@ -30,7 +30,7 @@ class AdminProductsController extends AbstractController
         $form = $this->createForm(FiltersType::class, $filter);
         $form->handleRequest($request);
 
-        $products = $repoProduct->findFilters($filter);
+        $products = $repoProduct->findFiltersadmin($filter);
 
         return $this->render('admin_products/index.html.twig', [
             'products' => $products,
