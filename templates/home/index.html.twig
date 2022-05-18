@@ -21,9 +21,9 @@ body{
     animation: ease-in-out;
 }
 
-@media only screen and (max-width: 1218px) {
+@media only screen and (max-width: 1320px) {
     body{
-
+        
         background-image: none;
     }
    
@@ -44,17 +44,17 @@ body{
         <div class="carousel-complete">
             <div id="carouselExampleIndicators" class="carousel carousel-container align-items-center slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button data-bs-target="#carouselExampleIndicators" class="btn-carousel active" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
+                    <button data-bs-target="#carouselExampleIndicators" class="btn-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button data-bs-target="#carouselExampleIndicators" class="btn-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button data-bs-target="#carouselExampleIndicators" class="btn-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button data-bs-target="#carouselExampleIndicators" class="btn-carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
                 </div>
             <div class="carousel-inner card-container ">
                 {% for k, product in RandomProducts %} 
                 <div class="carousel-item {% if k == 0 %} active {% endif %}">
                         <a href="{{  path("fiche_produit", {'id': product.id} )  }}"><img class="d-block m-auto image-card" src="{{ asset('img/upload/' ~ product.picture ) }}" alt="Image de Bière"></a> 
-                        <a class="product-name-link" href="{{  path("fiche_produit", {'id': product.id} )  }}"><p class="product-name"> {{ product.brewries.countries.flag }} {{ product.name|capitalize }}</p></a>
+                        <a class="product-name-link " href="{{  path("fiche_produit", {'id': product.id} )  }}"><p class="product-name"> {{ product.brewries.countries.flag }} {{ product.name|capitalize }}</p></a>
                 </div>
                 {% endfor %}
             </div>

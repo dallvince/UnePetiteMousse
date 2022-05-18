@@ -5,7 +5,7 @@
 {% block h1 %}Panier{% endblock %}
 
 {% block body %}
-
+    
     {% if basket.id is defined and basket.id|length > 0 %}
         <table class="table table-striped table-hover text-center">
             <thead >
@@ -72,21 +72,21 @@
             </tbody>
         </table>
 
-        <div class="row col-md-10 justify-content-between mx-auto mt-3">
-            <a class="btn btn-danger col-md-3 ms-3" href="{{ path("basket_remove_all") }}">Vider le panier</a>
+        <div class="row col-md-10 justify-content-between align-items-center mx-auto">
+            <a class="btn btn-danger col-md-2 mt-4 mx-auto btn-vider-panier" href="{{ path("basket_remove_all") }}">Vider le panier</a>
 
             {% if app.user %}
-                <a class="btn btn-success col-md-3 me-3" href="{{ path("basket_paiement")}}">Payer</a>
+                <a class="btn btn-success col-md-2 mt-4 mx-auto btn-payer" href="{{ path("basket_paiement")}}">Payer</a>
             {% else %}
-                <h4 class="col-md-3 me-3">Veuillez vous connecter pour payer</h4>
+                <h6 class="col-md-4 me-3 my-3 mx-auto">Veuillez vous <a href="{{ path('app_login') }}">connecter</a> pour passer au paiement</h6>
             {% endif %}
         </div>
 
     {% else %}
         <h4 class="text-center mt-3">Votre panier est vide</h4>
+        <img src="" alt="">
     {% endif %}
 {% endblock %}
-
 
 {% block javascripts %}
 

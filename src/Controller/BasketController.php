@@ -22,13 +22,15 @@ class BasketController extends AbstractController
      */
     public function index(SessionInterface $session, Basket $basket): Response
     {
-        // dd($session->get("basket"));
-        $basket->verification();
+        
+        
         $basketSession = $session->get("basket");
 
-
+        // dump($basketSession);
+       
         if($session->get("basket"))
         {
+            $basket->verification();
             $montant = $basket->montant();
         }
         else
@@ -36,10 +38,10 @@ class BasketController extends AbstractController
             $montant = 0;
         }
 
-        return $this->render('basket/index.html.twig', [
-            'basket' => $basketSession,
-            "montant" => $montant
-        ]);
+            return $this->render('basket/index.html.twig', [
+                'basket' => $basketSession,
+                "montant" => $montant
+            ]);
     }
 
     /**

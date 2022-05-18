@@ -46,17 +46,6 @@ class Products
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Ajouter une description")
-     *   @Assert\Image(
-     *     minWidth = 100,
-     *     maxWidth = 400,
-     *     minHeight = 100,
-     *     maxHeight = 400,
-     *     minHeightMessage = "Le fichier doit faire minimum 20 pixels de haut.",
-     *     maxHeightMessage = "Le fichier doit faire maximum 400 pixels de large.",
-     *     minWidthMessage = "Le fichier doit faire minimum 20 pixels de haut.",
-     *     maxWidthMessage = "Le fichier doit faire maximum 400 pixels de large."  
-     * )
      */
     private $picture;
 
@@ -69,7 +58,6 @@ class Products
      * @ORM\Column(type="float", nullable=true)
      * @Assert\NotBlank(message="Ajouter le degré d'alcool")
      * @Assert\Positive(message="Veuillez saisir un degré au dessus de zéro")
-
      * 
      */
     private $abv;

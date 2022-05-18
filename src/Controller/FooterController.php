@@ -19,6 +19,15 @@ class FooterController extends AbstractController
     }
 
     /**
+     * @Route("/mentions", name="app_mentions")
+     */
+    public function footer_mentions(): Response
+    {
+        return $this->render('footer/mentions.html.twig', [
+        ]);
+    }
+
+    /**
      * @Route("/livraison", name="app_livraison")
      */
     public function footer_livraison(): Response
