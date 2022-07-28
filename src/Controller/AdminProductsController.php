@@ -49,10 +49,10 @@ class AdminProductsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $stock = new Stocks;
-            $stock->setUpdatedAt(new \DateTimeImmutable('now'));
-            $entityManager->persist($stock);
-            $entityManager->flush();
+            // $stock = new Stocks;
+            // $stock->setUpdatedAt(new \DateTimeImmutable('now'));
+            // $entityManager->persist($stock);
+            // $entityManager->flush();
 
             $product->setCreatedAt(new \DateTimeImmutable('now'));
             $entityManager->persist($product);
@@ -68,7 +68,7 @@ class AdminProductsController extends AbstractController
                 $product->setPicture($pictureName);
             }
 
-            $product->setStocks($stock);
+            // $product->setStocks($stock);
 
             $entityManager->persist($product);
             $entityManager->flush();
